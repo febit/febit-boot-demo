@@ -1,0 +1,18 @@
+pluginManagement {
+  repositories {
+    maven { url "https://repo.huaweicloud.com/repository/maven" }
+    maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+  }
+}
+
+rootProject.name = 'febit-boot-demo'
+
+sub 'doggy'
+sub 'doggy-client'
+
+def sub(def dir) {
+  def name = ":febit-boot-demo-$dir"
+  include name
+  project(name).projectDir = file(dir)
+}

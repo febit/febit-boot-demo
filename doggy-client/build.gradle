@@ -1,0 +1,43 @@
+plugins {
+  id 'java-library'
+  id 'org.febit.boot.feign'
+}
+
+def PKG = "org.febit.boot.demo.doggy"
+
+codegenModule {
+  module "${PKG}.client.DoggyClientVersion"
+}
+
+codegenFeign {
+  scan "$PKG"
+
+  sourceProject = project(":febit-boot-demo-doggy")
+
+  client {
+    name = "febit-demo--doggy"
+    url = '${febit-demo.clients.doggy.url:}'
+    basePackage = "${PKG}.client"
+  }
+
+  naming {
+    global {
+      replacePackage "${PKG}.api.", "${PKG}.client."
+      replacePackage "${PKG}.model.", "${PKG}.client.model."
+    }
+    pojo {
+      replaceSuffix 'VO', 'AO'
+      replaceSuffix 'DTO', 'AO'
+      replaceSuffix 'Form', 'Req'
+    }
+    client {
+      prefix 'X'
+    }
+  }
+}
+
+dependencies {
+  api 'org.slf4j:slf4j-api'
+  api 'org.febit:febit-lang'
+  api 'org.febit.boot:febit-boot-starter-feign'
+}

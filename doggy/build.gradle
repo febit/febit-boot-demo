@@ -1,0 +1,70 @@
+plugins {
+  id "org.springframework.boot"
+  id 'org.febit.boot.flyway'
+  id 'org.febit.boot.jooq'
+}
+
+version '1.0.0-SNAPSHOT'
+
+def PKG = "org.febit.boot.demo.doggy"
+
+springBoot {
+  mainClass.set "${PKG}.DoggyApplication"
+}
+
+bootRun {
+  systemProperties System.properties
+}
+
+test {
+  useJUnitPlatform()
+  include '**/*Test.class'
+  // Exclude Integration Testing
+  exclude '**/*IT.class'
+}
+
+febitFlyway {
+  excludeTask '.*-prod'
+  excludeTask '.*-pre'
+  excludeTask '.*-clean-.*-tst'
+}
+
+codegenJooq {
+  def MODEL_PKG = "${PKG}.model"
+
+  embeddedPostgres()
+
+  schema = 'demo'
+  targetPackage = "${PKG}.jmodel"
+  generate {
+    springAnnotations = true
+  }
+  forcedTypes {
+    timeToInstant()
+    mapping([
+        t_doggy: [
+            breed : "enum: ${MODEL_PKG}.doggy.DoggyBreed",
+            gender: "enum: ${MODEL_PKG}.doggy.DoggyGender",
+        ]
+    ])
+  }
+}
+
+dependencies {
+  implementation 'org.slf4j:slf4j-api'
+  implementation 'org.febit:febit-lang'
+
+  implementation 'org.febit.boot:febit-boot-jooq'
+  implementation 'org.febit.boot:febit-boot-starter-web'
+  implementation 'org.springframework.boot:spring-boot-starter-actuator'
+  implementation 'org.springframework.boot:spring-boot-starter-jooq'
+
+  runtimeOnly 'org.flywaydb:flyway-core'
+  runtimeOnly 'com.h2database:h2'
+
+  codegenJooq 'org.slf4j:slf4j-simple'
+  codegenJooq 'org.febit.boot:febit-boot-common'
+
+  testRuntimeOnly 'com.h2database:h2'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}

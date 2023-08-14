@@ -1,0 +1,41 @@
+# EditorConfig is awesome: https://EditorConfig.org
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+max_line_length = 120
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+ij_continuation_indent_size = 4
+
+[*.{java,kt}]
+indent_size = 4
+ij_continuation_indent_size = 8
+ij_java_class_count_to_use_import_on_demand = 99
+ij_java_names_count_to_use_import_on_demand = 99
+ij_java_keep_blank_lines_in_code = 1
+ij_java_keep_blank_lines_in_declarations = 1
+ij_java_keep_blank_lines_before_right_brace = 1
+ij_java_keep_blank_lines_between_package_declaration_and_header = 1
+ij_java_packages_to_use_import_on_demand = $org.junit.jupiter.api.Assertions.**
+
+[*.groovy]
+indent_size = 4
+ij_groovy_keep_blank_lines_before_right_brace = 1
+ij_groovy_keep_blank_lines_in_code = 1
+ij_groovy_keep_blank_lines_in_declarations = 1
+ij_groovy_class_count_to_use_import_on_demand = 99
+ij_groovy_names_count_to_use_import_on_demand = 99
+
+
+[*.bat]
+end_of_line = crlf
+
+[*.md]
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab

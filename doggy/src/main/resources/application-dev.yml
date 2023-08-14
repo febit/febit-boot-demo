@@ -1,0 +1,10 @@
+server.tomcat:
+  threads:
+    min-spare: 1
+
+spring.datasource:
+  url: jdbc:h2:./build/db-dev/data${H2_MOCK_URL_PARAMS}
+  username: root
+  password: root
+  hikari:
+    schema: demo

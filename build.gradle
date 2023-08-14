@@ -1,0 +1,86 @@
+buildscript {
+  configurations.all { resolutionStrategy.cacheChangingModulesFor 0, 'seconds' }
+}
+plugins {
+  id 'com.github.hierynomus.license' version '0.16.1'
+  id 'org.febit.standard-java' version '1.1.0-SNAPSHOT'
+  id 'org.febit.standard-maven-publish' version '1.1.0-SNAPSHOT'
+  id 'org.febit.codegen-module' version '1.1.0-SNAPSHOT'
+  id 'org.springframework.boot' version "3.1.2" apply false
+  id 'org.febit.boot.jooq' version "3.0.0-SNAPSHOT" apply false
+  id 'org.febit.boot.flyway' version "3.0.0-SNAPSHOT" apply false
+  id 'org.febit.boot.feign' version "3.0.0-SNAPSHOT" apply false
+}
+
+ext {
+  vers = [
+      febitBoot: '3.0.0-SNAPSHOT',
+  ]
+}
+
+group 'org.febit.boot.demo'
+version '1.0.0-SNAPSHOT'
+
+allprojects {
+  apply plugin: 'com.github.hierynomus.license'
+
+  codegenModule {
+    defaultTemplate = fromFile("$rootDir/etc/module.java.tmpl")
+  }
+
+  license {
+    mapping {
+      java = 'SLASHSTAR_STYLE'
+    }
+    include '**/*.java'
+    exclude '**/jmodel/**/*.java'
+    ignoreFailures = true
+    strictCheck false
+    skipExistingHeaders false
+    header rootProject.file('etc/license-header.txt')
+  }
+}
+
+subprojects {
+  apply plugin: 'java'
+  sourceCompatibility = JavaVersion.VERSION_17
+  targetCompatibility = JavaVersion.VERSION_17
+
+  group = rootProject.group
+  version = rootProject.version
+
+  repositories {
+    maven { url "https://repo.huaweicloud.com/repository/maven" }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+  }
+
+  jacocoTestReport {
+    afterEvaluate {
+      getClassDirectories().setFrom(
+          classDirectories.files.collect {
+            fileTree(dir: it,
+                exclude: ['**/jmodel/**'])
+          }
+      )
+    }
+  }
+
+  dependencies {
+    compileOnly 'org.febit:febit-annotations-optional'
+    testCompileOnly 'org.febit:febit-annotations-optional'
+
+    testImplementation 'org.febit:febit-test-common'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+  }
+  dependencyManagement {
+    resolutionStrategy {
+      cacheChangingModulesFor 0, 'seconds'
+    }
+    imports {
+      mavenBom "org.febit.boot:febit-boot-dependencies:${vers.febitBoot}"
+    }
+    dependencies {
+    }
+  }
+}
