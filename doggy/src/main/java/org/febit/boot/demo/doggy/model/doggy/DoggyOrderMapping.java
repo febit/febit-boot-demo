@@ -16,12 +16,11 @@
 package org.febit.boot.demo.doggy.model.doggy;
 
 import lombok.Getter;
-import org.febit.boot.jooq.SearchForm;
 
 import java.time.Instant;
 
 @Getter
-public class DoggyOrderMapping implements SearchForm {
+public class DoggyOrderMapping {
 
     private Integer id;
     private String name;
