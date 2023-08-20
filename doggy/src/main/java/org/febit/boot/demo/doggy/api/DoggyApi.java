@@ -29,6 +29,7 @@ import org.febit.lang.protocol.IResponse;
 import org.febit.lang.protocol.Page;
 import org.febit.lang.protocol.Pagination;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,10 +42,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.List;
 
+@Validated
+@Tag(name = "Doggies API")
 @RestController
-@Tag(
-        name = "Doggies API"
-)
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/doggies", produces = {
         MediaType.APPLICATION_JSON_VALUE

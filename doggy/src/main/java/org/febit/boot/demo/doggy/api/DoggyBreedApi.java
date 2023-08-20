@@ -33,9 +33,9 @@ import java.util.List;
 
 @Slf4j
 @Validated
+@Tag(name = "Doggy Breads")
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "Doggy Breads")
 @RequestMapping(value = {
         "/api/v1/doggy-breeds"
 }, produces = {

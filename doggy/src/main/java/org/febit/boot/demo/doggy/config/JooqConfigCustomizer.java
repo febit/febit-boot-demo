@@ -15,16 +15,16 @@
  */
 package org.febit.boot.demo.doggy.config;
 
-import org.jooq.conf.Settings;
-import org.springframework.context.annotation.Bean;
+import org.jooq.impl.DefaultConfiguration;
+import org.springframework.boot.autoconfigure.jooq.DefaultConfigurationCustomizer;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class JooqConfig {
+public class JooqConfigCustomizer implements DefaultConfigurationCustomizer {
 
-    @Bean
-    public Settings settings() {
-        return new Settings()
+    @Override
+    public void customize(DefaultConfiguration conf) {
+        conf.settings()
                 .withRenderCatalog(false)
                 .withRenderSchema(false);
     }

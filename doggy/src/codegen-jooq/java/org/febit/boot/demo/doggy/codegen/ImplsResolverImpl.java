@@ -19,7 +19,7 @@ import org.febit.boot.devkit.jooq.runtime.spi.ImplementsResolver;
 import org.jooq.codegen.GeneratorStrategy;
 import org.jooq.meta.TableDefinition;
 
-public class DemoImplsResolver implements ImplementsResolver {
+public class ImplsResolverImpl implements ImplementsResolver {
 
     private static final String PKG_MODEL = "org.febit.boot.demo.doggy.model";
 

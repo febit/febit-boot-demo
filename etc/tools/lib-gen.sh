@@ -186,7 +186,7 @@ ${imports_lines}
 @OrderMappingBy(${entity}OrderMapping.class)
 public class ${entity}SearchForm implements SearchForm {
 
-    @KeywordIgnoreCase({
+    @Keyword({
     })
     private String q;
 
@@ -206,7 +206,7 @@ import org.jooq.Configuration;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ${entity}Dao extends BaseExtraDao<${entity}PO, T${entity}, ${entity_id_type}, ${entity}Record> {
+public class ${entity}Dao extends BaseExtraDao<T${entity}, ${entity}PO, ${entity_id_type}, ${entity}Record> {
 
     public ${entity}Dao(Configuration conf) {
         super(conf);
@@ -350,13 +350,13 @@ public class ${entity}Curd {
     }
 
     public Page<${entity}BriefVO> search(Pagination page, ${entity}SearchForm form) {
-        return dao.search(page, form)
+        return dao.page(page, form)
                 .transfer(${entity}BriefVO::of);
     }
 
     public List<${entity}BriefVO> list(${entity}SearchForm form) {
         return Lists.collect(
-                dao.list(form),
+                dao.listBy(form),
                 ${entity}BriefVO::of
         );
     }
@@ -364,7 +364,7 @@ public class ${entity}Curd {
     @Transactional(rollbackFor = Exception.class)
     public ${entity}PO create(${entity}CreateForm form) {
         var entity = form.to(${entity}PO::new);
-        entity.onCreate(auth);
+        entity.created(auth);
         dao.insert(entity);
         return entity;
     }
@@ -373,7 +373,7 @@ public class ${entity}Curd {
     public ${entity}PO update(${entity_id_type} id, ${entity}UpdateForm form) {
         var entity = require(id);
         form.to(entity);
-        entity.onUpdate(auth);
+        entity.updated(auth);
         dao.update(entity);
         return entity;
     }

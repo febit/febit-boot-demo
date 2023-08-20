@@ -13,24 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.febit.boot.demo.doggy.codegen;
+@NonNullApi
+package org.febit.boot.demo.doggy.config;
 
-import org.febit.boot.common.util.Priority;
-import org.febit.boot.devkit.jooq.runtime.spi.OutputNameResolver;
-import org.jooq.meta.Definition;
-import org.springframework.core.annotation.Order;
-
-@Order(Priority.HIGH)
-public class DemoOutputNameResolver implements OutputNameResolver {
-
-    private static String removeTablePrefix(String name) {
-        return name.replaceAll("^(?i)T_", "");
-    }
-
-    @Override
-    public String resolve(Definition definition) {
-        return removeTablePrefix(
-                definition.getOutputName()
-        );
-    }
-}
+import org.springframework.lang.NonNullApi;

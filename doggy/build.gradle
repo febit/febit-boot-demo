@@ -24,9 +24,8 @@ test {
 }
 
 febitFlyway {
-  excludeTask '.*-prod'
-  excludeTask '.*-pre'
-  excludeTask '.*-clean-.*-tst'
+  // excludeTask '.*-(baseline|undo|repair)-.*'
+  excludeTask '.*-(prod|pre|uat|unit-test)'
 }
 
 codegenJooq {
@@ -51,19 +50,17 @@ codegenJooq {
 }
 
 dependencies {
-  implementation 'org.slf4j:slf4j-api'
   implementation 'org.febit:febit-lang'
 
   implementation 'org.febit.boot:febit-boot-jooq'
   implementation 'org.febit.boot:febit-boot-starter-web'
+  implementation 'org.febit.boot:febit-boot-starter-jooq'
   implementation 'org.springframework.boot:spring-boot-starter-actuator'
-  implementation 'org.springframework.boot:spring-boot-starter-jooq'
 
   runtimeOnly 'org.flywaydb:flyway-core'
   runtimeOnly 'com.h2database:h2'
 
   codegenJooq 'org.slf4j:slf4j-simple'
-  codegenJooq 'org.febit.boot:febit-boot-common'
 
   testRuntimeOnly 'com.h2database:h2'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'

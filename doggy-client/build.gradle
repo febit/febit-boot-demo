@@ -37,7 +37,5 @@ codegenFeign {
 }
 
 dependencies {
-  api 'org.slf4j:slf4j-api'
-  api 'org.febit:febit-lang'
-  api 'org.febit.boot:febit-boot-starter-feign'
+  api 'org.febit.boot:febit-boot-feign'
 }
