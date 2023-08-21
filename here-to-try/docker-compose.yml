@@ -1,0 +1,31 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:14
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - pg-lib:/var/lib/postgresql
+      - pg-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: demo
+
+  doggy:
+    # image: febit/febit-boot-demo
+    build:
+      context: '../'
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: doggy/build/libs/febit-boot-demo-doggy.jar
+    environment:
+      SERVER_PORT: 80
+      SPRING_PROFILES_ACTIVE: quick-startup
+    ports:
+      - '8081:80'
+    volumes:
+      - ./config:/app/config:ro
+
+volumes:
+  pg-lib:
+  pg-data:

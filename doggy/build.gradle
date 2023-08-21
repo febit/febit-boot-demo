@@ -16,6 +16,10 @@ bootRun {
   systemProperties System.properties
 }
 
+bootJar {
+  archiveFileName = "${project.name}.jar"
+}
+
 test {
   useJUnitPlatform()
   include '**/*Test.class'
@@ -33,7 +37,7 @@ codegenJooq {
 
   embeddedPostgres()
 
-  schema = 'demo'
+  schema = 'doggy'
   targetPackage = "${PKG}.jmodel"
   generate {
     springAnnotations = true
@@ -59,6 +63,7 @@ dependencies {
 
   runtimeOnly 'org.flywaydb:flyway-core'
   runtimeOnly 'com.h2database:h2'
+  runtimeOnly 'org.postgresql:postgresql'
 
   codegenJooq 'org.slf4j:slf4j-simple'
 

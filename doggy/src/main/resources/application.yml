@@ -6,4 +6,4 @@ spring:
     name: febit-boot-demo
 
 H2_MOCK_URL_PARAMS: >-
-  ;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;INIT=create schema if not exists demo
+  ;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;INIT=create schema if not exists doggy

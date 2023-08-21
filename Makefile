@@ -22,3 +22,12 @@ build:
 .PHONY: build-fast
 build-fast:
 	./gradlew build -x check -x test
+
+.PHONY: build-image
+build-image:
+	docker build \
+ 		-t febit/febit-boot-demo \
+		-f Dockerfile \
+		--build-arg JAR_FILE=doggy/build/libs/febit-boot-demo-doggy.jar \
+		--load \
+		.
