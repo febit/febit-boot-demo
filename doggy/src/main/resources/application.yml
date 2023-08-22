@@ -1,9 +1,20 @@
 server.port: ${SERVER_PORT:8081}
 
 spring:
-  profiles.active: dev
+  profiles.active: local-dev
   application:
     name: febit-boot-demo
+
+logging.group:
+  jooq:
+    - org.jooq.Constants
+    - org.jooq.tools.LoggerListener
+  app:
+    - org.febit.boot.demo.doggy
+
+logging.level:
+  app: info
+  jooq: warn
 
 H2_MOCK_URL_PARAMS: >-
   ;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;INIT=create schema if not exists doggy

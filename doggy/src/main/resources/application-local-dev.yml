@@ -1,3 +1,5 @@
+# logging.file.path: ./build/logs
+
 server.tomcat:
   threads:
     min-spare: 1
@@ -8,3 +10,7 @@ spring.datasource:
   password: root
   hikari:
     schema: demo
+
+logging.level:
+  jooq: info
+  app: debug

@@ -2,52 +2,18 @@
 <configuration scan="true" scanPeriod="60 seconds">
   <contextName>demo-doggy</contextName>
 
-  <springProfile name="dev | local-test">
-    <property name="LOG_PATH" value="./build/logs"/>
-  </springProfile>
-
   <include resource="febit-boot/logging/logback/defaults.xml"/>
 
-  <logger name="org.jooq.Constants" level="warn"/>
-
-  <appender name="CONSOLE_FULL" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <Pattern>${LOG_PATTERN_CONSOLE}</Pattern>
-      <charset>UTF-8</charset>
-    </encoder>
-  </appender>
-
-  <appender name="FILE_FULL" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${LOG_PATH}/full.log</file>
-    <encoder>
-      <pattern>${LOG_PATTERN_FILE}</pattern>
-      <charset>UTF-8</charset>
-    </encoder>
-    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${LOG_PATH}/full/full-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-      <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-        <maxFileSize>${KEEP_FILE_MAX_SIZE}</maxFileSize>
-      </timeBasedFileNamingAndTriggeringPolicy>
-      <maxHistory>${KEEP_MAX_DAY}</maxHistory>
-    </rollingPolicy>
-  </appender>
-
   <root level="info">
-    <appender-ref ref="CONSOLE_FULL"/>
+    <appender-ref ref="CONSOLE"/>
   </root>
 
   <springProfile name="!(local-dev | local-test | unit-test)">
     <root level="info">
-      <appender-ref ref="FILE_FULL"/>
-      <appender-ref ref="FILE_DEBUG"/>
-      <appender-ref ref="FILE_INFO"/>
-      <appender-ref ref="FILE_ERROR"/>
+      <appender-ref ref="FILE_ALL"/>
       <appender-ref ref="FILE_WARN"/>
+      <appender-ref ref="FILE_ERROR"/>
     </root>
-  </springProfile>
-
-  <springProfile name="dev | test | local-test">
-    <logger name="org.jooq.tools.LoggerListener" level="debug"/>
   </springProfile>
 
 </configuration>
