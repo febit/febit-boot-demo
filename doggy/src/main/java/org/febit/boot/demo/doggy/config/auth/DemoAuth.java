@@ -13,18 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.febit.boot.demo.doggy.model.doggy;
+package org.febit.boot.demo.doggy.config.auth;
 
-import lombok.Data;
-import org.febit.boot.common.model.IModel;
-import org.febit.boot.common.model.INamed;
-import org.febit.boot.demo.doggy.jmodel.po.DoggyPO;
+import org.febit.boot.common.auth.AuthSubject;
 
-@Data
-public class DoggyUpdateForm implements IModel<DoggyPO>, INamed {
+public interface DemoAuth extends AuthSubject {
 
-    private DoggyGender gender;
-    private DoggyBreed breed;
-    private String name;
-    private String description;
+    String getDisplayName();
 }

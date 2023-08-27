@@ -13,18 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.febit.boot.demo.doggy.model.doggy;
+package org.febit.boot.demo.doggy.config.auth;
 
-import lombok.Data;
-import org.febit.boot.common.model.IModel;
-import org.febit.boot.common.model.INamed;
-import org.febit.boot.demo.doggy.jmodel.po.DoggyPO;
+import org.febit.boot.common.auth.DelegateAuthSubject;
 
-@Data
-public class DoggyUpdateForm implements IModel<DoggyPO>, INamed {
+import java.util.function.Supplier;
 
-    private DoggyGender gender;
-    private DoggyBreed breed;
-    private String name;
-    private String description;
+public interface DelegatedDemoAuth extends DemoAuth, DelegateAuthSubject<DemoAuth> {
+
+    static DelegatedDemoAuth delegated(Supplier<DemoAuth> supplier) {
+        return supplier::get;
+    }
+
+    @Override
+    default String getDisplayName() {
+        return delegated().getDisplayName();
+    }
 }

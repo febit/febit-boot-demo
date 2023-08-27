@@ -18,6 +18,8 @@ package org.febit.boot.demo.doggy.api;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.febit.boot.common.permission.AnonymousApi;
+import org.febit.boot.demo.doggy.config.auth.DemoAuth;
 import org.febit.boot.web.IBasicApi;
 import org.febit.lang.protocol.IResponse;
 import org.springframework.http.MediaType;
@@ -38,9 +40,17 @@ import org.springframework.web.bind.annotation.RestController;
 })
 public class CommonApi implements IBasicApi {
 
+    private final DemoAuth auth;
+
+    @AnonymousApi
     @GetMapping(value = "/ping")
     public IResponse<String> ping() {
         return ok("pong");
     }
 
+    @AnonymousApi
+    @GetMapping(value = "/who-am-i")
+    public IResponse<DemoAuth> whoAmI() {
+        return ok(auth);
+    }
 }

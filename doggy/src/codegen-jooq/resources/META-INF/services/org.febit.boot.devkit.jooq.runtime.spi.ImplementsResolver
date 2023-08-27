@@ -1,1 +1,1 @@
-org.febit.boot.demo.doggy.codegen.ImplsResolverImpl
+org.febit.boot.devkit.jooq.runtime.spi.lib.BootImplsResolver

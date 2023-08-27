@@ -14,26 +14,3 @@
  * limitations under the License.
  */
 package org.febit.boot.demo.doggy.model;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.annotation.Nullable;
-import java.util.Objects;
-
-public interface INamed {
-
-    String getName();
-
-    @JsonIgnore
-    default boolean isNameEquals(@Nullable String name) {
-        return Objects.equals(getName(), name);
-    }
-
-    @JsonIgnore
-    default boolean isNameEquals(@Nullable INamed other) {
-        if (other == null) {
-            return false;
-        }
-        return isNameEquals(other.getName());
-    }
-}

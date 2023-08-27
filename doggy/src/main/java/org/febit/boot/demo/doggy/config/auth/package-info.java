@@ -13,30 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.febit.boot.demo.doggy.model;
+@NonNullApi
+package org.febit.boot.demo.doggy.config.auth;
 
-import java.time.Instant;
-
-public interface IChangeTracing {
-
-    void setCreatedAt(Instant createdAt);
-
-    void setUpdatedAt(Instant updatedAt);
-
-    void setCreatedBy(String createdBy);
-
-    void setUpdatedBy(String updatedBy);
-
-    default void created(String code) {
-        var now = Instant.now();
-        setCreatedAt(now);
-        setUpdatedAt(now);
-        setCreatedBy(code);
-        setUpdatedBy(code);
-    }
-
-    default void updated(String code) {
-        setUpdatedAt(Instant.now());
-        setUpdatedBy(code);
-    }
-}
+import org.springframework.lang.NonNullApi;

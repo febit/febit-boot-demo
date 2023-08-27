@@ -20,6 +20,10 @@ bootJar {
   archiveFileName = "${project.name}.jar"
 }
 
+codegenModule {
+  module "${PKG}.DoggyApiVersion"
+}
+
 test {
   useJUnitPlatform()
   include '**/*Test.class'
@@ -56,8 +60,8 @@ codegenJooq {
 dependencies {
   implementation 'org.febit:febit-lang'
 
-  implementation 'org.febit.boot:febit-boot-jooq'
-  implementation 'org.febit.boot:febit-boot-starter-web'
+  implementation 'org.febit.boot:febit-boot-starter-webmvc'
+  implementation 'org.febit.boot:febit-boot-starter-web-auth'
   implementation 'org.febit.boot:febit-boot-starter-jooq'
   implementation 'org.springframework.boot:spring-boot-starter-actuator'
 

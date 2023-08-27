@@ -82,7 +82,7 @@ package ${MODEL_PKG};
 
 import ${JMODEL_PKG}.po.${entity}PO;
 import lombok.Data;
-import org.febit.boot.common.util.Models;
+import org.febit.boot.common.model.Models;
 
 ${imports_lines}
 
@@ -103,7 +103,7 @@ package ${MODEL_PKG};
 
 import ${JMODEL_PKG}.po.${entity}PO;
 import lombok.Data;
-import org.febit.boot.common.util.Models;
+import org.febit.boot.common.model.Models;
 
 ${imports_lines}
 

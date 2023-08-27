@@ -19,6 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.febit.boot.common.util.Errors;
+import org.febit.boot.demo.doggy.Permissions;
 import org.febit.boot.demo.doggy.model.doggy.DoggyCreateForm;
 import org.febit.boot.demo.doggy.model.doggy.DoggySearchForm;
 import org.febit.boot.demo.doggy.model.doggy.DoggyUpdateForm;
@@ -30,14 +31,7 @@ import org.febit.lang.protocol.Page;
 import org.febit.lang.protocol.Pagination;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -53,15 +47,17 @@ public class DoggyApi implements IBasicApi {
 
     final DoggyService service;
 
+    @Permissions.Basic
     @GetMapping("/{id}")
     public IResponse<DoggyVO> requireById(
-            @PathVariable int id
+            @PathVariable Integer id
     ) {
         return ok(
                 service.requireVoById(id)
         );
     }
 
+    @Permissions.Basic
     @PostMapping("/list")
     public IResponse<Collection<DoggyVO>> list(
             @RequestBody @Valid DoggySearchForm form
@@ -71,6 +67,7 @@ public class DoggyApi implements IBasicApi {
         );
     }
 
+    @Permissions.Basic
     @PostMapping("/search")
     public IResponse<Page<DoggyVO>> search(
             Pagination page,
@@ -81,6 +78,7 @@ public class DoggyApi implements IBasicApi {
         );
     }
 
+    @Permissions.Admin
     @PostMapping
     public IResponse<DoggyVO> create(
             @RequestBody @Valid DoggyCreateForm form
@@ -90,6 +88,7 @@ public class DoggyApi implements IBasicApi {
         );
     }
 
+    @Permissions.Admin
     @PutMapping("/{id}")
     public IResponse<DoggyVO> update(
             @PathVariable Integer id,
@@ -98,6 +97,7 @@ public class DoggyApi implements IBasicApi {
         return ok(service.update(id, form));
     }
 
+    @Permissions.Admin
     @DeleteMapping("/{id}")
     public IResponse<Void> deleteById(
             @PathVariable Integer id
@@ -106,6 +106,7 @@ public class DoggyApi implements IBasicApi {
         return ok();
     }
 
+    @Permissions.Admin
     @DeleteMapping("/by-ids/{ids}")
     public IResponse<Void> deleteByIds(
             @PathVariable List<Integer> ids

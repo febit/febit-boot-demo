@@ -18,6 +18,7 @@ package org.febit.boot.demo.doggy.api;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.febit.boot.demo.doggy.Permissions;
 import org.febit.boot.demo.doggy.model.doggy.DoggyBreed;
 import org.febit.boot.demo.doggy.model.doggy.DoggyBreedVO;
 import org.febit.boot.web.IBasicApi;
@@ -44,6 +45,7 @@ import java.util.List;
 public class DoggyBreedApi implements IBasicApi {
 
     @GetMapping
+    @Permissions.Basic
     public IResponse<List<DoggyBreedVO>> listAll() {
         return ok(Lists.collect(
                 DoggyBreed.values(),

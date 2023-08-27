@@ -18,6 +18,7 @@ package org.febit.boot.demo.doggy.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.febit.boot.common.util.Errors;
+import org.febit.boot.demo.doggy.config.auth.DemoAuth;
 import org.febit.boot.demo.doggy.dao.DoggyDao;
 import org.febit.boot.demo.doggy.jmodel.po.DoggyPO;
 import org.febit.boot.demo.doggy.model.doggy.DoggyCreateForm;
@@ -38,8 +39,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DoggyService {
 
-    private static final String FAKE_AUTH_CODE = "fake";
-
+    final DemoAuth auth;
     final DoggyDao dao;
 
     public DoggyPO require(Integer id) {
@@ -84,7 +84,7 @@ public class DoggyService {
             );
         }
         form.to(po);
-        po.updated(FAKE_AUTH_CODE);
+        po.updated(auth);
         dao.update(po);
         return DoggyVO.of(po);
     }
@@ -96,7 +96,7 @@ public class DoggyService {
                 "doggies.name.exists", form.getName()
         );
         var po = form.to(DoggyPO::new);
-        po.created(FAKE_AUTH_CODE);
+        po.created(auth);
         dao.insert(po);
         return DoggyVO.of(po);
     }
