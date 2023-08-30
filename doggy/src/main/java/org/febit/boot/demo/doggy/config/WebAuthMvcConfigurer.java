@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.febit.boot.demo.doggy.config.auth;
+package org.febit.boot.demo.doggy.config;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.febit.boot.web.auth.WebAuthHandler;
+import org.febit.boot.auth.WebAuthHandler;
+import org.febit.boot.demo.doggy.model.auth.DemoAuth;
 import org.febit.boot.web.util.AuthHandlerInterceptor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

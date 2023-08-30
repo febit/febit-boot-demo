@@ -15,9 +15,11 @@
  */
 package org.febit.boot.demo.doggy;
 
+import org.febit.boot.EnableFebitAuth;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@EnableFebitAuth
 @SpringBootApplication
 public class DoggyApplication {
 

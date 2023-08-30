@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.febit.boot.demo.doggy.config.auth;
+package org.febit.boot.demo.doggy.component;
 
 import org.apache.commons.lang3.StringUtils;
+import org.febit.boot.auth.WebRequestAuthSubjectResolver;
 import org.febit.boot.common.util.AuthErrors;
-import org.febit.boot.web.auth.WebRequestAuthSubjectResolver;
+import org.febit.boot.demo.doggy.model.auth.DemoAuth;
+import org.febit.boot.demo.doggy.model.auth.DemoAuthImpl;
 import org.febit.lang.annotation.NonNullApi;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
@@ -27,7 +29,7 @@ import java.util.Optional;
 
 @NonNullApi
 @Component
-public class DemoWebRequestAuthSubjectResolver implements WebRequestAuthSubjectResolver<DemoAuth> {
+public class DemoWebRequestAuthSubjectResolverImpl implements WebRequestAuthSubjectResolver<DemoAuth> {
 
     private static final String PREFIX_FAKE = "Fake ";
     private static final String FAKE_FMT = "Fake authCode:displayName";

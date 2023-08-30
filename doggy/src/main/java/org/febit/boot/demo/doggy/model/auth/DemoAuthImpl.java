@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.febit.boot.demo.doggy.config.auth;
+package org.febit.boot.demo.doggy.model.auth;
 
-import org.febit.boot.common.auth.DelegateAuthSubject;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.jackson.Jacksonized;
 
-import java.util.function.Supplier;
+@Getter
+@Setter
+@Jacksonized
+@lombok.Builder(
+        builderClassName = "Builder"
+)
+public class DemoAuthImpl implements DemoAuth {
 
-public interface DelegatedDemoAuth extends DemoAuth, DelegateAuthSubject<DemoAuth> {
-
-    static DelegatedDemoAuth delegated(Supplier<DemoAuth> supplier) {
-        return supplier::get;
-    }
-
-    @Override
-    default String getDisplayName() {
-        return delegated().getDisplayName();
-    }
+    private final String code;
+    private final String displayName;
 }

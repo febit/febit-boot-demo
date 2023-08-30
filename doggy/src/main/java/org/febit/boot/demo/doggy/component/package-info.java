@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 @NonNullApi
-package org.febit.boot.demo.doggy.config.auth;
+package org.febit.boot.demo.doggy.component;
 
 import org.springframework.lang.NonNullApi;

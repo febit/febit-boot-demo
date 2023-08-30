@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.febit.boot.demo.doggy.config.auth;
+package org.febit.boot.demo.doggy.config;
 
 import org.febit.boot.common.auth.AuthSuppliers;
 import org.febit.boot.common.auth.ThreadLocalAuthSupplier;
+import org.febit.boot.demo.doggy.model.auth.DelegatedDemoAuth;
+import org.febit.boot.demo.doggy.model.auth.DemoAuth;
 import org.febit.boot.web.util.RequestAttributeAuthSupplier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

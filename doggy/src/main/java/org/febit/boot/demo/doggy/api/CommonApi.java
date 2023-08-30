@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.febit.boot.common.permission.AnonymousApi;
-import org.febit.boot.demo.doggy.config.auth.DemoAuth;
+import org.febit.boot.demo.doggy.model.auth.DemoAuth;
 import org.febit.boot.web.IBasicApi;
 import org.febit.lang.protocol.IResponse;
 import org.springframework.http.MediaType;

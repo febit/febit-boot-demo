@@ -84,6 +84,7 @@ subprojects {
       mavenBom "org.febit.boot:febit-boot-dependencies:${vers.febitBoot}"
     }
     dependencies {
+
     }
   }
 }
