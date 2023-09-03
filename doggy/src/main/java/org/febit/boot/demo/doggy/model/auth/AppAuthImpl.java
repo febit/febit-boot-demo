@@ -15,9 +15,19 @@
  */
 package org.febit.boot.demo.doggy.model.auth;
 
-import org.febit.boot.common.auth.AuthSubject;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.jackson.Jacksonized;
 
-public interface DemoAuth extends AuthSubject {
+@Getter
+@Setter
+@Jacksonized
+@lombok.Builder(
+        builderClassName = "Builder"
+)
+public class AppAuthImpl implements AppAuth {
 
-    String getDisplayName();
+    private final Long id;
+    private final String code;
+    private final String displayName;
 }

@@ -24,21 +24,26 @@ import java.lang.annotation.Target;
 
 public @interface Permissions {
 
-    @Permission(
-            module = "demo",
-            code = "all",
-            action = "admin"
-    )
+    String MODULE = "demo";
+    String ALL = "all";
+
+    String BASIC = "basic";
+    String ADMIN = "admin";
+    String MAINTAINER = "maintainer";
+
+    @Permission(module = MODULE, code = ALL, action = ADMIN)
     @Target(ElementType.METHOD)
     @Retention(RetentionPolicy.RUNTIME)
     @interface Admin {
     }
 
-    @Permission(
-            module = "demo",
-            code = "all",
-            action = "basic"
-    )
+    @Permission(module = MODULE, code = ALL, action = MAINTAINER)
+    @Target(ElementType.METHOD)
+    @Retention(RetentionPolicy.RUNTIME)
+    @interface Maintainer {
+    }
+
+    @Permission(module = MODULE, code = ALL, action = BASIC)
     @Target(ElementType.METHOD)
     @Retention(RetentionPolicy.RUNTIME)
     @interface Basic {

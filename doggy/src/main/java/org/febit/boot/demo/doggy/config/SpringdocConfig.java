@@ -32,10 +32,17 @@ import org.springframework.web.method.HandlerMethod;
 public class SpringdocConfig {
 
     private static final String AUTH_FAKE = "Fake-Token";
+    private static final String AUTH_BEARER = "Bearer";
 
     @Bean
     public OpenAPI openAPI() {
         return new OpenAPI()
+                .info(new Info()
+                        .title("Demo API")
+                        .version("v" + DoggyApiVersion.version()
+                                + "-" + DoggyApiVersion.builtAt()
+                        )
+                )
                 .components(new Components()
                         .addSecuritySchemes(AUTH_FAKE,
                                 new SecurityScheme()
@@ -43,27 +50,28 @@ public class SpringdocConfig {
                                         .in(SecurityScheme.In.HEADER)
                                         .type(SecurityScheme.Type.APIKEY)
                         )
-                )
-                .info(new Info()
-                        .title("Demo API")
-                        .version("v" + DoggyApiVersion.version()
-                                + "-" + DoggyApiVersion.builtAt()
+                        .addSecuritySchemes(AUTH_BEARER,
+                                new SecurityScheme()
+                                        .name(HttpHeaders.AUTHORIZATION)
+                                        .in(SecurityScheme.In.HEADER)
+                                        .type(SecurityScheme.Type.APIKEY)
                         )
                 );
     }
 
-    @Bean
-    public GroupedOpenApi apiGroup_v1() {
+    @Bean("grouped_api_v1")
+    public GroupedOpenApi v1() {
         return GroupedOpenApi.builder()
                 .group("v1")
                 .pathsToMatch("/api/v1/**")
-                .addOperationCustomizer(this::applyFakeAuth)
+                .addOperationCustomizer(this::applyAuth)
                 .build();
     }
 
-    private Operation applyFakeAuth(Operation operation, HandlerMethod handlerMethod) {
-        return operation.addSecurityItem(
-                new SecurityRequirement().addList(AUTH_FAKE)
+    private Operation applyAuth(Operation operation, HandlerMethod handlerMethod) {
+        return operation.addSecurityItem(new SecurityRequirement()
+                .addList(AUTH_FAKE)
+                .addList(AUTH_BEARER)
         );
     }
 }

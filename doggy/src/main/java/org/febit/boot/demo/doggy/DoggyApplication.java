@@ -16,11 +16,16 @@
 package org.febit.boot.demo.doggy;
 
 import org.febit.boot.EnableFebitAuth;
+import org.febit.boot.demo.doggy.config.IAppConfigPkg;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @EnableFebitAuth
 @SpringBootApplication
+@ConfigurationPropertiesScan(basePackageClasses = {
+        IAppConfigPkg.class
+})
 public class DoggyApplication {
 
     public static void main(String[] args) {

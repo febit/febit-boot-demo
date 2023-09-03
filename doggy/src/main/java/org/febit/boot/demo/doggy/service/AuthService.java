@@ -1,0 +1,153 @@
+package org.febit.boot.demo.doggy.service;
+
+import com.nimbusds.jose.JOSEException;
+import com.nimbusds.jwt.JWTClaimsSet;
+import jakarta.annotation.Nullable;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.febit.boot.common.util.AuthErrors;
+import org.febit.boot.common.util.Errors;
+import org.febit.boot.demo.doggy.config.AuthProps;
+import org.febit.boot.demo.doggy.dao.AccountDao;
+import org.febit.boot.demo.doggy.dao.AccountPermissionDao;
+import org.febit.boot.demo.doggy.jmodel.po.AccountPO;
+import org.febit.boot.demo.doggy.model.account.AccountVO;
+import org.febit.boot.demo.doggy.model.auth.AppAuth;
+import org.febit.boot.demo.doggy.model.auth.AppAuthImpl;
+import org.febit.boot.demo.doggy.model.auth.LoginForm;
+import org.febit.boot.demo.doggy.model.auth.LoginVO;
+import org.febit.boot.demo.doggy.model.auth.PasswordChangeForm;
+import org.febit.boot.jwt.JwtCodec;
+import org.febit.lang.protocol.BusinessException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.time.Instant;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Objects;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class AuthService {
+
+    final AppAuth auth;
+
+    final AuthProps props;
+    final JwtCodec jwtCodec;
+
+    final AccountDao accountDao;
+    final AccountCurd accountCurd;
+    final AccountPermissionDao accountPermissionDao;
+
+    private static class BCryptPasswordEncoderLazyHolder {
+        private static final BCryptPasswordEncoder INSTANCE = new BCryptPasswordEncoder();
+    }
+
+    public boolean checkPermissions(AppAuth auth, Collection<String> permissions) {
+        return accountPermissionDao.checkPermissions(auth.getCode(), permissions);
+    }
+
+    public LoginVO login(LoginForm form) {
+        var account = accountDao.findValidByUsername(form.getUsername());
+        if (account == null || account.getPasswordHash() == null) {
+            if (log.isDebugEnabled()) {
+                if (account == null) {
+                    log.debug("Unauthorized: account not found");
+                } else if (account.getPasswordHash() == null) {
+                    log.debug("Unauthorized: password not set");
+                } else {
+                    log.debug("Unauthorized: account not found and password not set");
+                }
+            }
+            throw AuthErrors.UNAUTHORIZED
+                    .exception("Invalid username or incorrect password");
+        }
+
+        verifyPassword(form.getPassword(), account.getPasswordHash());
+
+        var expireAt = Instant.now().plusSeconds(props.getTokenExpireSeconds());
+        String token;
+        try {
+            token = jwtCodec.encode(toJwtClaimsSet(account, expireAt));
+        } catch (JOSEException e) {
+            log.error("Failed to encode jwt token", e);
+            throw Errors.SYSTEM.exception("Failed to encode jwt token");
+        }
+        return LoginVO.builder()
+                .token(token)
+                .expireAt(expireAt)
+                .account(AccountVO.of(account))
+                .build();
+    }
+
+    public void verifyPassword(String password, @Nullable String encryptedPassword) {
+        var match = BCryptPasswordEncoderLazyHolder.INSTANCE
+                .matches(password, encryptedPassword);
+
+        if (!match) {
+            if (log.isDebugEnabled()) {
+                log.debug("Unauthorized: incorrect password");
+            }
+            throw AuthErrors.UNAUTHORIZED
+                    .exception("Invalid username or incorrect password");
+        }
+    }
+
+    public void changePassword(PasswordChangeForm form) {
+        var account = accountCurd.require(auth.getId());
+        verifyPassword(form.getOldPassword(), account.getPasswordHash());
+
+        var newHash = BCryptPasswordEncoderLazyHolder.INSTANCE
+                .encode(form.getNewPassword());
+
+        accountCurd.changePasswordHash(auth.getId(), newHash);
+    }
+
+    public AppAuth fromJwtToken(String token) {
+        var resp = jwtCodec.decode(token);
+        if (resp.isFailed()) {
+            if (AuthErrors.INVALID_TOKEN.name().equals(resp.getCode())) {
+                log.debug("Invalid jwt token: {}", resp.getMessage());
+                throw AuthErrors.INVALID_TOKEN
+                        .exception("Invalid token");
+            }
+            throw BusinessException.from(resp);
+        }
+
+        var payload = resp.getData();
+        Objects.requireNonNull(payload);
+        return from(payload);
+    }
+
+    public AppAuth fromAccountCode(String code) {
+        var account = accountDao.findValidByUsername(code);
+        if (account == null) {
+            throw AuthErrors.UNAUTHORIZED
+                    .exception("Invalid account: {0}", code);
+        }
+        return from(account);
+    }
+
+    public AppAuth from(AccountPO account) {
+        return AppAuthImpl.builder()
+                .id(account.getId())
+                .code(account.getUsername())
+                .displayName(account.getDisplayName())
+                .build();
+    }
+
+    public AppAuth from(JWTClaimsSet claims) {
+        var code = claims.getSubject();
+        return fromAccountCode(code);
+    }
+
+    public JWTClaimsSet toJwtClaimsSet(AccountPO account, Instant expireAt) {
+        return new JWTClaimsSet.Builder()
+                .subject(account.getUsername())
+                .issueTime(new Date())
+                .expirationTime(Date.from(expireAt))
+                .build();
+    }
+}

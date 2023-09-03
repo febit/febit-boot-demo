@@ -24,14 +24,21 @@ import org.febit.boot.demo.doggy.model.doggy.DoggyCreateForm;
 import org.febit.boot.demo.doggy.model.doggy.DoggySearchForm;
 import org.febit.boot.demo.doggy.model.doggy.DoggyUpdateForm;
 import org.febit.boot.demo.doggy.model.doggy.DoggyVO;
-import org.febit.boot.demo.doggy.service.DoggyService;
+import org.febit.boot.demo.doggy.service.DoggyCurd;
 import org.febit.boot.web.IBasicApi;
 import org.febit.lang.protocol.IResponse;
 import org.febit.lang.protocol.Page;
 import org.febit.lang.protocol.Pagination;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 import java.util.List;
@@ -45,7 +52,7 @@ import java.util.List;
 })
 public class DoggyApi implements IBasicApi {
 
-    final DoggyService service;
+    final DoggyCurd curd;
 
     @Permissions.Basic
     @GetMapping("/{id}")
@@ -53,7 +60,7 @@ public class DoggyApi implements IBasicApi {
             @PathVariable Integer id
     ) {
         return ok(
-                service.requireVoById(id)
+                curd.requireVoById(id)
         );
     }
 
@@ -63,7 +70,7 @@ public class DoggyApi implements IBasicApi {
             @RequestBody @Valid DoggySearchForm form
     ) {
         return ok(
-                service.list(form)
+                curd.list(form)
         );
     }
 
@@ -74,7 +81,7 @@ public class DoggyApi implements IBasicApi {
             @RequestBody @Valid DoggySearchForm form
     ) {
         return ok(
-                service.search(form, page)
+                curd.search(form, page)
         );
     }
 
@@ -84,7 +91,7 @@ public class DoggyApi implements IBasicApi {
             @RequestBody @Valid DoggyCreateForm form
     ) {
         return ok(
-                service.create(form)
+                curd.create(form)
         );
     }
 
@@ -94,7 +101,7 @@ public class DoggyApi implements IBasicApi {
             @PathVariable Integer id,
             @RequestBody @Valid DoggyUpdateForm form
     ) {
-        return ok(service.update(id, form));
+        return ok(curd.update(id, form));
     }
 
     @Permissions.Admin
@@ -102,7 +109,7 @@ public class DoggyApi implements IBasicApi {
     public IResponse<Void> deleteById(
             @PathVariable Integer id
     ) {
-        service.deleteById(id);
+        curd.deleteById(id);
         return ok();
     }
 
@@ -113,7 +120,7 @@ public class DoggyApi implements IBasicApi {
     ) {
         Errors.ILLEGAL_ARG.whenFalse(ids.size() <= 1000,
                 "args.size.less-equals-than", "ids", 100);
-        service.deleteByIds(ids);
+        curd.deleteByIds(ids);
         return ok();
     }
 

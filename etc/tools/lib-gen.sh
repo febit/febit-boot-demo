@@ -82,7 +82,7 @@ package ${MODEL_PKG};
 
 import ${JMODEL_PKG}.po.${entity}PO;
 import lombok.Data;
-import org.febit.boot.common.model.Models;
+import org.febit.boot.common.util.Models;
 
 ${imports_lines}
 
@@ -103,7 +103,7 @@ package ${MODEL_PKG};
 
 import ${JMODEL_PKG}.po.${entity}PO;
 import lombok.Data;
-import org.febit.boot.common.model.Models;
+import org.febit.boot.common.util.Models;
 
 ${imports_lines}
 
@@ -124,7 +124,7 @@ package ${MODEL_PKG};
 
 import ${JMODEL_PKG}.po.${entity}PO;
 import lombok.Data;
-import org.febit.boot.common.util.IModel;
+import org.febit.boot.common.model.IModel;
 
 ${imports_lines}
 
@@ -140,7 +140,7 @@ EOF
   cat > "${MODEL_DIR}/${entity}UpdateForm.java" <<EOF
 package ${MODEL_PKG};
 
-import org.febit.boot.common.util.IModel;
+import org.febit.boot.common.model.IModel;
 import ${JMODEL_PKG}.po.${entity}PO;
 import lombok.Data;
 
@@ -229,7 +229,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.febit.boot.common.util.Errors;
-import org.febit.boot.web.IBasicApi;
 import org.febit.lang.protocol.*;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;

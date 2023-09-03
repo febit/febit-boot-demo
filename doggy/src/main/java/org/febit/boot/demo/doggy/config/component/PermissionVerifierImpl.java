@@ -13,23 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.febit.boot.demo.doggy.component;
+package org.febit.boot.demo.doggy.config.component;
 
+import lombok.RequiredArgsConstructor;
 import org.febit.boot.common.permission.PermissionItem;
 import org.febit.boot.common.permission.PermissionVerifier;
-import org.febit.boot.demo.doggy.model.auth.DemoAuth;
+import org.febit.boot.demo.doggy.Permissions;
+import org.febit.boot.demo.doggy.config.Auths;
+import org.febit.boot.demo.doggy.model.auth.AppAuth;
+import org.febit.boot.demo.doggy.service.AuthService;
+import org.febit.lang.util.Lists;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
 @Component
-public class DemoPermissionVerifierImpl implements PermissionVerifier<DemoAuth> {
+@RequiredArgsConstructor
+public class PermissionVerifierImpl implements PermissionVerifier<AppAuth> {
 
-    public static final String ADMIN = "admin";
-    public static final String ANONYMOUS = "anonymous";
+    public static final String ADMIN = Auths.ADMIN.getCode();
+    public static final String ANONYMOUS = Auths.ANONYMOUS.getCode();
+
+    private static final String BASIC_OF_ALL = Permissions.MODULE
+            + ':' + Permissions.ALL + ':' + Permissions.BASIC;
+
+    private final AuthService authService;
 
     @Override
-    public boolean isAllow(DemoAuth auth, Collection<PermissionItem> allows) {
+    public boolean isAllow(AppAuth auth, Collection<PermissionItem> allows) {
         var code = auth.getCode().toLowerCase();
         if (ADMIN.equals(code)) {
             return true;
@@ -37,9 +48,17 @@ public class DemoPermissionVerifierImpl implements PermissionVerifier<DemoAuth> 
         if (ANONYMOUS.equals(code)) {
             return false;
         }
+
         // Basic roles for basic accounts.
-        return allows.stream()
+        var allowBasic = allows.stream()
                 .map(PermissionItem::getCode)
-                .anyMatch(p -> p.endsWith(":basic"));
+                .anyMatch(p -> p.equals(BASIC_OF_ALL));
+        if (allowBasic) {
+            return true;
+        }
+
+        return authService.checkPermissions(auth,
+                Lists.collect(allows, PermissionItem::getCode)
+        );
     }
 }

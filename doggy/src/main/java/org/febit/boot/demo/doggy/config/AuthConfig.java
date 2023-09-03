@@ -17,8 +17,9 @@ package org.febit.boot.demo.doggy.config;
 
 import org.febit.boot.common.auth.AuthSuppliers;
 import org.febit.boot.common.auth.ThreadLocalAuthSupplier;
-import org.febit.boot.demo.doggy.model.auth.DelegatedDemoAuth;
-import org.febit.boot.demo.doggy.model.auth.DemoAuth;
+import org.febit.boot.demo.doggy.model.auth.AppAuth;
+import org.febit.boot.demo.doggy.model.auth.DelegatedAppAuth;
+import org.febit.boot.jwt.JwtCodec;
 import org.febit.boot.web.util.RequestAttributeAuthSupplier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,13 +30,20 @@ import java.util.List;
 public class AuthConfig {
 
     @Bean
-    public DemoAuth demoAuth() {
+    public AppAuth demoAuth() {
         var resolvers = List.of(
-                new ThreadLocalAuthSupplier<DemoAuth>(),
-                RequestAttributeAuthSupplier.create(DemoAuth.class)
+                new ThreadLocalAuthSupplier<AppAuth>(),
+                RequestAttributeAuthSupplier.create(AppAuth.class)
         );
-        return DelegatedDemoAuth.delegated(
+        return DelegatedAppAuth.delegate(
                 () -> AuthSuppliers.get(resolvers)
         );
+    }
+
+    @Bean
+    public JwtCodec authJwtCodec(
+            AuthProps props
+    ) {
+        return new JwtCodec(props.getJwt());
     }
 }

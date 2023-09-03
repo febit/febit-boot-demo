@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.febit.boot.common.permission.AnonymousApi;
-import org.febit.boot.demo.doggy.model.auth.DemoAuth;
+import org.febit.boot.demo.doggy.model.auth.AppAuth;
 import org.febit.boot.web.IBasicApi;
 import org.febit.lang.protocol.IResponse;
 import org.springframework.http.MediaType;
@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 })
 public class CommonApi implements IBasicApi {
 
-    private final DemoAuth auth;
+    private final AppAuth auth;
 
     @AnonymousApi
     @GetMapping(value = "/ping")
@@ -50,7 +50,7 @@ public class CommonApi implements IBasicApi {
 
     @AnonymousApi
     @GetMapping(value = "/who-am-i")
-    public IResponse<DemoAuth> whoAmI() {
+    public IResponse<AppAuth> whoAmI() {
         return ok(auth);
     }
 }

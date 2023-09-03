@@ -18,12 +18,11 @@ package org.febit.boot.demo.doggy.dao;
 import org.febit.boot.demo.doggy.jmodel.po.DoggyPO;
 import org.febit.boot.demo.doggy.jmodel.record.DoggyRecord;
 import org.febit.boot.demo.doggy.jmodel.table.TDoggy;
-import org.febit.boot.jooq.BaseCurdDao;
 import org.jooq.Configuration;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class DoggyDao extends BaseCurdDao<TDoggy, DoggyPO, Integer, DoggyRecord> {
+public class DoggyDao extends BaseExtraDao<TDoggy, DoggyPO, Integer, DoggyRecord> {
 
     public DoggyDao(Configuration conf) {
         super(conf);

@@ -30,6 +30,8 @@ ij_groovy_keep_blank_lines_in_declarations = 1
 ij_groovy_class_count_to_use_import_on_demand = 99
 ij_groovy_names_count_to_use_import_on_demand = 99
 
+[*.sql]
+max_line_length = 256
 
 [*.bat]
 end_of_line = crlf

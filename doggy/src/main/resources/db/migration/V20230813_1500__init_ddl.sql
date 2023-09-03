@@ -1,3 +1,6 @@
+CREATE SCHEMA IF NOT EXISTS "doggy";
+SET search_path TO "doggy";
+
 DROP TABLE IF EXISTS t_doggy;
 CREATE TABLE t_doggy
 (

@@ -64,6 +64,7 @@ dependencies {
   implementation 'org.febit.boot:febit-boot-starter-jooq'
   implementation 'org.febit.boot:febit-boot-starter-jwt'
 
+  implementation 'org.springframework.security:spring-security-crypto'
   implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
   runtimeOnly 'org.flywaydb:flyway-core'

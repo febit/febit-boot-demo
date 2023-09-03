@@ -19,10 +19,15 @@ import org.febit.boot.common.auth.DelegateAuthSubject;
 
 import java.util.function.Supplier;
 
-public interface DelegatedDemoAuth extends DemoAuth, DelegateAuthSubject<DemoAuth> {
+public interface DelegatedAppAuth extends AppAuth, DelegateAuthSubject<AppAuth> {
 
-    static DelegatedDemoAuth delegated(Supplier<DemoAuth> supplier) {
+    static DelegatedAppAuth delegate(Supplier<AppAuth> supplier) {
         return supplier::get;
+    }
+
+    @Override
+    default Long getId() {
+        return delegated().getId();
     }
 
     @Override

@@ -1,0 +1,18 @@
+version: "3"
+services:
+  db:
+    image: postgres:15
+    hostname: db
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: demo_dev
+    ports:
+      - "54322:5432"
+    volumes:
+      - lib:/var/lib/postgresql
+      - data:/var/lib/postgresql/data
+
+volumes:
+  lib:
+  data:

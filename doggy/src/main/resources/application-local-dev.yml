@@ -1,16 +1,22 @@
-# logging.file.path: ./build/logs
+spring.datasource:
+  url: jdbc:postgresql://localhost:54322/demo_dev?currentSchema=doggy
+  username: test
+  password: test
 
 server.tomcat:
   threads:
     min-spare: 1
 
-spring.datasource:
-  url: jdbc:h2:./build/db-dev/data${H2_MOCK_URL_PARAMS}
-  username: root
-  password: root
-  hikari:
-    schema: demo
-
 logging.level:
-  jooq: info
   app: debug
+  jooq: info
+
+app.auth.jwt:
+  signerKeyId: es1
+  keys:
+    - id: es1
+      algorithm: ES256
+      verifier-key: |-
+        MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEEVs/o5+uQbTjL3chynL4wXgUg2R9q9UU8I5mEovUf86QZ7kOBIjJwqnzD1omageEHWwHdBO6B+dFabmdT9POxg==
+      signer-key: |-
+        MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgevZzL1gdAFr88hb2OF/2NxApJCzGCEDdfSp6VQO30hyhRANCAAQRWz+jn65BtOMvdyHKcvjBeBSDZH2r1RTwjmYSi9R/zpBnuQ4EiMnCqfMPWiZqB4QdbAd0E7oH50VpuZ1P087G

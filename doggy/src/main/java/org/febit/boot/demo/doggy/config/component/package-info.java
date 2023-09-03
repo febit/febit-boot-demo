@@ -13,20 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.febit.boot.demo.doggy.model.auth;
+@NonNullApi
+package org.febit.boot.demo.doggy.config.component;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.jackson.Jacksonized;
-
-@Getter
-@Setter
-@Jacksonized
-@lombok.Builder(
-        builderClassName = "Builder"
-)
-public class DemoAuthImpl implements DemoAuth {
-
-    private final String code;
-    private final String displayName;
-}
+import org.springframework.lang.NonNullApi;
