@@ -20,7 +20,7 @@ import org.springframework.boot.autoconfigure.jooq.DefaultConfigurationCustomize
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class JooqConfigCustomizer implements DefaultConfigurationCustomizer {
+public class JooqCustomizer implements DefaultConfigurationCustomizer {
 
     @Override
     public void customize(DefaultConfiguration conf) {

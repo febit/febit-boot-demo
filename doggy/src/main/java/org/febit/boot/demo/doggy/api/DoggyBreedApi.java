@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.febit.boot.demo.doggy.Permissions;
 import org.febit.boot.demo.doggy.model.doggy.DoggyBreed;
 import org.febit.boot.demo.doggy.model.doggy.DoggyBreedVO;
-import org.febit.boot.web.IBasicApi;
+import org.febit.lang.protocol.IBasicApi;
 import org.febit.lang.protocol.IResponse;
 import org.febit.lang.util.Lists;
 import org.springframework.http.MediaType;

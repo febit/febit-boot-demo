@@ -40,7 +40,7 @@ public class SpringdocConfig {
                 .info(new Info()
                         .title("Demo API")
                         .version("v" + DoggyApiVersion.version()
-                                + "-" + DoggyApiVersion.builtAt()
+                                + "-" + DoggyApiVersion.buildTime()
                         )
                 )
                 .components(new Components()

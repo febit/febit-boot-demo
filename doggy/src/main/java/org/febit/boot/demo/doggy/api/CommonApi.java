@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.febit.boot.common.permission.AnonymousApi;
 import org.febit.boot.demo.doggy.model.auth.AppAuth;
-import org.febit.boot.web.IBasicApi;
+import org.febit.lang.protocol.IBasicApi;
 import org.febit.lang.protocol.IResponse;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;

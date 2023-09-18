@@ -12,7 +12,7 @@ import org.febit.boot.demo.doggy.model.auth.PasswordChangeForm;
 import org.febit.boot.demo.doggy.service.AccountCurd;
 import org.febit.boot.demo.doggy.service.AccountPermissionCurd;
 import org.febit.boot.demo.doggy.service.AuthService;
-import org.febit.boot.web.IBasicApi;
+import org.febit.lang.protocol.IBasicApi;
 import org.febit.lang.protocol.IResponse;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;

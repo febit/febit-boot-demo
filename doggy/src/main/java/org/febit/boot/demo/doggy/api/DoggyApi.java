@@ -25,7 +25,7 @@ import org.febit.boot.demo.doggy.model.doggy.DoggySearchForm;
 import org.febit.boot.demo.doggy.model.doggy.DoggyUpdateForm;
 import org.febit.boot.demo.doggy.model.doggy.DoggyVO;
 import org.febit.boot.demo.doggy.service.DoggyCurd;
-import org.febit.boot.web.IBasicApi;
+import org.febit.lang.protocol.IBasicApi;
 import org.febit.lang.protocol.IResponse;
 import org.febit.lang.protocol.Page;
 import org.febit.lang.protocol.Pagination;

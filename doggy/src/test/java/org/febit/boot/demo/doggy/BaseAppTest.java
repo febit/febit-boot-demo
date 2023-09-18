@@ -15,6 +15,8 @@
  */
 package org.febit.boot.demo.doggy;
 
+import org.febit.boot.FebitBoot;
+import org.febit.boot.module.FebitModuleEnvironments;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,6 +34,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public abstract class BaseAppTest {
 
     @SpringBootApplication
+    @FebitModuleEnvironments(value = DoggyApiVersion.class)
+    @FebitModuleEnvironments(value = FebitBoot.class, prefix = "febit-boot")
     public static class TestApplication {
 
         public static void main(String[] args) {

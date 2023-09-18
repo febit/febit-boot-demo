@@ -1,0 +1,8 @@
+::::::::::::::: ${spring.application.name} :::::::::::::::::::::
+::  Version              ::  ${app.module.version} (${app.module.short-commit-id} - ${app.module.build-time})
+::  Active Profiles      ::  ${spring.profiles.active}
+::  Server Port          ::  ${server.port}
+::  Java                 ::  ${java.version}
+::  Spring Boot          ::  ${spring-boot.version}
+::  Febit Boot           ::  ${febit-boot.version} (${febit-boot.short-commit-id} - ${febit-boot.build-time})
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
