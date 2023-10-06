@@ -19,6 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.febit.boot.common.permission.AnonymousApi;
+import org.febit.boot.demo.doggy.JsonApiMapping;
 import org.febit.boot.demo.doggy.Permissions;
 import org.febit.boot.demo.doggy.model.account.AccountVO;
 import org.febit.boot.demo.doggy.model.auth.LoginForm;
@@ -29,25 +30,19 @@ import org.febit.boot.demo.doggy.service.AccountPermissionCurd;
 import org.febit.boot.demo.doggy.service.AuthService;
 import org.febit.lang.protocol.IBasicApi;
 import org.febit.lang.protocol.IResponse;
-import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 
 @Validated
-@RestController
-@RequiredArgsConstructor
 @Tag(name = "Auth API")
-@RequestMapping(value = {
+@JsonApiMapping({
         "/api/v1/auth"
-}, produces = {
-        MediaType.APPLICATION_JSON_VALUE
 })
+@RequiredArgsConstructor
 public class AuthApi implements IBasicApi {
 
     private final AccountCurd accountCurd;

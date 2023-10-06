@@ -15,12 +15,12 @@
  */
 package org.febit.boot.demo.doggy.codegen;
 
-import org.febit.boot.common.util.Priority;
 import org.febit.boot.devkit.jooq.runtime.spi.OutputNameResolver;
 import org.jooq.meta.Definition;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
-@Order(Priority.HIGH)
+@Order(Ordered.HIGHEST_PRECEDENCE + 1)
 public class OutputNameResolverImpl implements OutputNameResolver {
 
     private static String removeTablePrefix(String name) {

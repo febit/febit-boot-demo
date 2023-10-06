@@ -17,27 +17,20 @@ package org.febit.boot.demo.doggy.api;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.febit.boot.common.permission.AnonymousApi;
+import org.febit.boot.demo.doggy.JsonApiMapping;
 import org.febit.boot.demo.doggy.model.auth.AppAuth;
 import org.febit.lang.protocol.IBasicApi;
 import org.febit.lang.protocol.IResponse;
-import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
 @Validated
-@RestController
-@RequiredArgsConstructor
 @Tag(name = "Common")
-@RequestMapping(value = {
+@JsonApiMapping({
         "/api/v1/common"
-}, produces = {
-        MediaType.APPLICATION_JSON_VALUE
 })
+@RequiredArgsConstructor
 public class CommonApi implements IBasicApi {
 
     private final AppAuth auth;
