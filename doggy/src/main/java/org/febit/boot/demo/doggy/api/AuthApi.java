@@ -30,14 +30,12 @@ import org.febit.boot.demo.doggy.service.AccountPermissionCurd;
 import org.febit.boot.demo.doggy.service.AuthService;
 import org.febit.lang.protocol.IBasicApi;
 import org.febit.lang.protocol.IResponse;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collection;
 
-@Validated
 @Tag(name = "Auth API")
 @JsonApiMapping({
         "/api/v1/auth"

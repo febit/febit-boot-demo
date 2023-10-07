@@ -22,10 +22,8 @@ import org.febit.boot.demo.doggy.JsonApiMapping;
 import org.febit.boot.demo.doggy.model.auth.AppAuth;
 import org.febit.lang.protocol.IBasicApi;
 import org.febit.lang.protocol.IResponse;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Validated
 @Tag(name = "Common")
 @JsonApiMapping({
         "/api/v1/common"

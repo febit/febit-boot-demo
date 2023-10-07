@@ -30,7 +30,6 @@ import org.febit.lang.protocol.IBasicApi;
 import org.febit.lang.protocol.IResponse;
 import org.febit.lang.protocol.Page;
 import org.febit.lang.protocol.Pagination;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,7 +41,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.List;
 
-@Validated
 @Tag(name = "Doggies API")
 @RestController
 @RequiredArgsConstructor

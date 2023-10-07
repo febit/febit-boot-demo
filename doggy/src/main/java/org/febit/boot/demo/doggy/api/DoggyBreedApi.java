@@ -24,12 +24,10 @@ import org.febit.boot.demo.doggy.model.doggy.DoggyBreedVO;
 import org.febit.lang.protocol.IBasicApi;
 import org.febit.lang.protocol.IResponse;
 import org.febit.lang.util.Lists;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-@Validated
 @Tag(name = "Doggy Breads")
 @JsonApiMapping({
         "/api/v1/doggy-breeds"

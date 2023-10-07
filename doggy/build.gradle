@@ -4,8 +4,6 @@ plugins {
   id 'org.febit.boot.jooq'
 }
 
-version '1.0.0-SNAPSHOT'
-
 def PKG = "org.febit.boot.demo.doggy"
 
 springBoot {
@@ -22,13 +20,6 @@ bootJar {
 
 codegenModule {
   module "${PKG}.DoggyApiVersion"
-}
-
-test {
-  useJUnitPlatform()
-  include '**/*Test.class'
-  // Exclude Integration Testing
-  exclude '**/*IT.class'
 }
 
 febitFlyway {
