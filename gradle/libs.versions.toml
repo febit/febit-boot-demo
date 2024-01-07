@@ -1,0 +1,24 @@
+[versions]
+febit-boot = '3.0.0'
+febit-commons = '3.0.0'
+febit-devkit = '1.1.0'
+
+hierynomus-license = '0.16.1'
+spring-boot = '3.1.7'
+
+
+[libraries]
+febit-boot-deps = { module = 'org.febit.boot:febit-boot-dependencies', version.ref = 'febit-boot' }
+
+
+[plugins]
+febit-bom = { id = 'org.febit.standard-bom', version.ref = 'febit-devkit' }
+febit-boot-feign = { id = 'org.febit.boot.feign', version.ref = 'febit-boot' }
+febit-boot-flyway = { id = 'org.febit.boot.flyway', version.ref = 'febit-boot' }
+febit-boot-jooq = { id = 'org.febit.boot.jooq', version.ref = 'febit-boot' }
+febit-codegen-module = { id = 'org.febit.codegen-module', version.ref = 'febit-devkit' }
+febit-java = { id = 'org.febit.standard-java', version.ref = 'febit-devkit' }
+febit-maven-publish = { id = 'org.febit.standard-maven-publish', version.ref = 'febit-devkit' }
+
+license = { id = 'com.github.hierynomus.license', version.ref = 'hierynomus-license' }
+spring-boot = { id = 'org.springframework.boot', version.ref = 'spring-boot' }

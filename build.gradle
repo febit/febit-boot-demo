@@ -1,21 +1,13 @@
-buildscript {
-  configurations.all { resolutionStrategy.cacheChangingModulesFor 0, 'seconds' }
-}
 plugins {
-  id 'com.github.hierynomus.license' version '0.16.1'
-  id 'org.febit.standard-java' version '1.1.0'
-  id 'org.febit.standard-maven-publish' version '1.1.0'
-  id 'org.febit.codegen-module' version '1.1.0'
-  id 'org.springframework.boot' version "3.1.4" apply false
-  id 'org.febit.boot.jooq' version "3.0.0-SNAPSHOT" apply false
-  id 'org.febit.boot.flyway' version "3.0.0-SNAPSHOT" apply false
-  id 'org.febit.boot.feign' version "3.0.0-SNAPSHOT" apply false
+  alias libs.plugins.febit.java
+  alias libs.plugins.febit.maven.publish
+  alias libs.plugins.febit.codegen.module
+  alias libs.plugins.license
+
+  alias libs.plugins.spring.boot apply false
 }
 
 ext {
-  vers = [
-      febitBoot: '3.0.0-SNAPSHOT',
-  ]
 }
 
 group 'org.febit.boot.demo'
@@ -54,7 +46,7 @@ subprojects {
 
   repositories {
     maven { url "https://repo.huaweicloud.com/repository/maven" }
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+//     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
   }
 
   test {
@@ -76,22 +68,12 @@ subprojects {
   }
 
   dependencies {
+    implementation(platform(libs.febit.boot.deps))
     compileOnly 'org.febit:febit-annotations-optional'
     testCompileOnly 'org.febit:febit-annotations-optional'
 
     testImplementation 'org.febit:febit-commons-test'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-  }
-  dependencyManagement {
-    resolutionStrategy {
-      cacheChangingModulesFor 0, 'seconds'
-    }
-    imports {
-      mavenBom "org.febit.boot:febit-boot-dependencies:${vers.febitBoot}"
-    }
-    dependencies {
-
-    }
   }
 }

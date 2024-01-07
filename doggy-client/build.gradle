@@ -1,6 +1,6 @@
 plugins {
   id 'java-library'
-  id 'org.febit.boot.feign'
+  alias libs.plugins.febit.boot.feign
 }
 
 def PKG = "org.febit.boot.demo.doggy"
