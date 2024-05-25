@@ -1,10 +1,10 @@
 [versions]
-febit-boot = '3.0.0'
-febit-commons = '3.0.0'
+febit-boot = '3.2.0-SNAPSHOT'
+febit-commons = '3.1.0-SNAPSHOT'
 febit-devkit = '1.1.0'
 
 hierynomus-license = '0.16.1'
-spring-boot = '3.1.7'
+spring-boot = '3.2.6'
 
 
 [libraries]
