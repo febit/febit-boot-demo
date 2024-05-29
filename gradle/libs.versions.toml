@@ -6,6 +6,7 @@ febit-devkit = '1.1.0'
 hierynomus-license = '0.16.1'
 spring-boot = '3.2.6'
 
+lombok = '1.18.32'
 
 [libraries]
 febit-boot-deps = { module = 'org.febit.boot:febit-boot-dependencies', version.ref = 'febit-boot' }

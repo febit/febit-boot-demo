@@ -44,6 +44,10 @@ subprojects {
   group = rootProject.group
   version = rootProject.version
 
+  lombok {
+    version = libs.versions.lombok
+  }
+
   repositories {
     maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     maven { url "https://repo.huaweicloud.com/repository/maven" }
