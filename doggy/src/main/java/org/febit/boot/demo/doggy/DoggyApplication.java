@@ -17,6 +17,7 @@ package org.febit.boot.demo.doggy;
 
 import org.febit.boot.EnableFebitAuth;
 import org.febit.boot.FebitBoot;
+import org.febit.boot.demo.doggy.auth.config.IAuthConfigPkg;
 import org.febit.boot.demo.doggy.config.IAppConfigPkg;
 import org.febit.boot.module.FebitModuleEnvironments;
 import org.springframework.boot.SpringApplication;
@@ -26,7 +27,8 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @EnableFebitAuth
 @SpringBootApplication
 @ConfigurationPropertiesScan(basePackageClasses = {
-        IAppConfigPkg.class
+        IAppConfigPkg.class,
+        IAuthConfigPkg.class
 })
 @FebitModuleEnvironments(value = DoggyApiVersion.class)
 @FebitModuleEnvironments(value = FebitBoot.class, prefix = "febit-boot")

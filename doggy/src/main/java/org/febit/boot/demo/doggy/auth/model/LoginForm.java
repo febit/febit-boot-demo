@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.febit.boot.demo.doggy.config;
+package org.febit.boot.demo.doggy.auth.model;
 
-import org.jooq.impl.DefaultConfiguration;
-import org.springframework.boot.autoconfigure.jooq.DefaultConfigurationCustomizer;
-import org.springframework.context.annotation.Configuration;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.Getter;
+import lombok.Setter;
 
-@Configuration
-public class JooqCustomizer implements DefaultConfigurationCustomizer {
+@Setter
+@Getter
+public class LoginForm {
 
-    @Override
-    public void customize(DefaultConfiguration conf) {
-        conf.settings()
-                .withRenderCatalog(false)
-                .withRenderSchema(true);
-    }
+    @NotEmpty
+    private String username;
+
+    @NotEmpty
+    private String password;
+
 }

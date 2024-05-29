@@ -13,19 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.febit.boot.demo.doggy.config;
+package org.febit.boot.demo.doggy.auth.model;
 
-import org.jooq.impl.DefaultConfiguration;
-import org.springframework.boot.autoconfigure.jooq.DefaultConfigurationCustomizer;
-import org.springframework.context.annotation.Configuration;
+import org.febit.boot.common.auth.DelegateAuthSubject;
+import org.febit.boot.demo.doggy.auth.AppAuth;
 
-@Configuration
-public class JooqCustomizer implements DefaultConfigurationCustomizer {
+import java.util.function.Supplier;
+
+public interface DelegatedAppAuth extends AppAuth, DelegateAuthSubject<AppAuth> {
+
+    static DelegatedAppAuth delegate(Supplier<AppAuth> supplier) {
+        return supplier::get;
+    }
 
     @Override
-    public void customize(DefaultConfiguration conf) {
-        conf.settings()
-                .withRenderCatalog(false)
-                .withRenderSchema(true);
+    default Long getId() {
+        return delegated().getId();
+    }
+
+    @Override
+    default String getDisplayName() {
+        return delegated().getDisplayName();
     }
 }

@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.febit.boot.common.util.Errors;
 import org.febit.boot.demo.doggy.dao.DoggyDao;
 import org.febit.boot.demo.doggy.jmodel.po.DoggyPO;
-import org.febit.boot.demo.doggy.model.auth.AppAuth;
+import org.febit.boot.demo.doggy.auth.AppAuth;
 import org.febit.boot.demo.doggy.model.doggy.DoggyCreateForm;
 import org.febit.boot.demo.doggy.model.doggy.DoggySearchForm;
 import org.febit.boot.demo.doggy.model.doggy.DoggyUpdateForm;

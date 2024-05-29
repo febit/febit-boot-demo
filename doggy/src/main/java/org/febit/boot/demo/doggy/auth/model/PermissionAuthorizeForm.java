@@ -13,19 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.febit.boot.demo.doggy.config;
+package org.febit.boot.demo.doggy.auth.model;
 
-import org.jooq.impl.DefaultConfiguration;
-import org.springframework.boot.autoconfigure.jooq.DefaultConfigurationCustomizer;
-import org.springframework.context.annotation.Configuration;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
-@Configuration
-public class JooqCustomizer implements DefaultConfigurationCustomizer {
+import java.util.Set;
 
-    @Override
-    public void customize(DefaultConfiguration conf) {
-        conf.settings()
-                .withRenderCatalog(false)
-                .withRenderSchema(true);
-    }
+@Setter
+@Getter
+public class PermissionAuthorizeForm {
+
+    @NotNull
+    private Long accountId;
+
+    @NotNull
+    @Size(max = 1000)
+    private Set<String> permissions;
 }

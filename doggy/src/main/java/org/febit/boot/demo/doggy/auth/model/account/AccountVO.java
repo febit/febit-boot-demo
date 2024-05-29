@@ -13,19 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.febit.boot.demo.doggy.config;
+package org.febit.boot.demo.doggy.auth.model.account;
 
-import org.jooq.impl.DefaultConfiguration;
-import org.springframework.boot.autoconfigure.jooq.DefaultConfigurationCustomizer;
-import org.springframework.context.annotation.Configuration;
+import lombok.Data;
+import org.febit.boot.common.util.Models;
+import org.febit.boot.demo.doggy.jmodel.po.AccountPO;
 
-@Configuration
-public class JooqCustomizer implements DefaultConfigurationCustomizer {
+import java.time.Instant;
 
-    @Override
-    public void customize(DefaultConfiguration conf) {
-        conf.settings()
-                .withRenderCatalog(false)
-                .withRenderSchema(true);
+@Data
+public class AccountVO {
+
+    private Long id;
+    private String username;
+    private String displayName;
+    private Boolean enabled;
+    private Instant createdAt;
+    private Instant updatedAt;
+    private String createdBy;
+    private String updatedBy;
+
+    public static AccountVO of(AccountPO entity) {
+        return Models.map(entity, AccountVO::new);
     }
 }
