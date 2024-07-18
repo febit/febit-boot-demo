@@ -1,4 +1,4 @@
-FROM amazoncorretto:17-alpine-jdk as builder
+FROM amazoncorretto:21-alpine-jdk as builder
 
 ARG JAR_FILE
 
@@ -7,7 +7,7 @@ WORKDIR /app
 COPY ${JAR_FILE} app.jar
 RUN java -Djarmode=layertools -jar app.jar extract
 
-FROM amazoncorretto:17-alpine-jdk
+FROM amazoncorretto:21-alpine-jdk
 
 WORKDIR /app
 
@@ -16,4 +16,4 @@ COPY --from=builder /app/spring-boot-loader/ ./
 COPY --from=builder /app/snapshot-dependencies/ ./
 COPY --from=builder /app/application/ ./
 
-ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]
