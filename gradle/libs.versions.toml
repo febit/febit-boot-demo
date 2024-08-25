@@ -1,10 +1,10 @@
 [versions]
-febit-boot = '3.3.0'
-febit-commons = '3.1.0'
-febit-devkit = '1.3.0'
+febit-boot = '3.3.1'
+febit-commons = '3.1.1'
+febit-devkit = '1.4.0'
 
 hierynomus-license = '0.16.1'
-spring-boot = '3.3.2'
+spring-boot = '3.3.3'
 
 lombok = '1.18.34'
 
