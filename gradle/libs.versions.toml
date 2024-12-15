@@ -1,16 +1,18 @@
 [versions]
-febit-boot = '3.3.1'
-febit-commons = '3.1.1'
+febit-boot = '3.4.0-SNAPSHOT'
+febit-commons = '3.2.0'
 febit-devkit = '1.4.0'
 
 hierynomus-license = '0.16.1'
-spring-boot = '3.3.3'
+spring-boot = '3.4.0'
+#springdoc = '2.7.0'
 
-lombok = '1.18.34'
+lombok = '1.18.36'
 
 [libraries]
+febit-commons-deps = { module = 'org.febit:febit-commons-dependencies', version.ref = 'febit-commons' }
 febit-boot-deps = { module = 'org.febit.boot:febit-boot-dependencies', version.ref = 'febit-boot' }
-
+#springdoc = { module = 'org.springdoc:springdoc-openapi-starter-webmvc-ui', version.ref = 'springdoc' }
 
 [plugins]
 febit-bom = { id = 'org.febit.standard-bom', version.ref = 'febit-devkit' }

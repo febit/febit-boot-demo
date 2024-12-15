@@ -32,7 +32,7 @@ import org.febit.boot.demo.doggy.auth.model.AppAuthImpl;
 import org.febit.boot.demo.doggy.auth.model.LoginForm;
 import org.febit.boot.demo.doggy.auth.model.LoginVO;
 import org.febit.boot.demo.doggy.auth.model.PasswordChangeForm;
-import org.febit.boot.jwt.JwtCodec;
+import org.febit.common.jwt.JwtCodec;
 import org.febit.lang.protocol.BusinessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -49,9 +49,9 @@ subprojects {
   }
 
   repositories {
-    // maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
-    maven { url "https://repo.huaweicloud.com/repository/maven" }
+//    maven { url "https://repo.huaweicloud.com/repository/maven" }
     mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
   }
 
   test {
@@ -73,7 +73,9 @@ subprojects {
   }
 
   dependencies {
+    implementation(platform(libs.febit.commons.deps))
     implementation(platform(libs.febit.boot.deps))
+
     compileOnly 'org.febit:febit-annotations-optional'
     testCompileOnly 'org.febit:febit-annotations-optional'
 

@@ -17,7 +17,7 @@ package org.febit.boot.demo.doggy.auth.config;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.febit.boot.jwt.JwtCodecProps;
+import org.febit.common.jwt.JwtCodecProps;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Getter

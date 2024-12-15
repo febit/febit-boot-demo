@@ -49,7 +49,10 @@ codegenJooq {
 }
 
 dependencies {
+//  implementation libs.springdoc
+
   implementation 'org.febit:febit-lang'
+  implementation 'org.febit:febit-commons-stuff'
 
   implementation 'org.febit.boot:febit-boot-starter-webmvc'
   implementation 'org.febit.boot:febit-boot-starter-jooq'
