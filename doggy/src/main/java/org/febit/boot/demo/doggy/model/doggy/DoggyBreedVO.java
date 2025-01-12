@@ -16,7 +16,7 @@
 package org.febit.boot.demo.doggy.model.doggy;
 
 import lombok.Data;
-import org.febit.boot.common.util.Models;
+import org.febit.boot.util.Models;
 
 @Data
 public class DoggyBreedVO {

@@ -1,11 +1,10 @@
 [versions]
-febit-boot = '3.4.0-SNAPSHOT'
-febit-commons = '3.2.0'
+febit-boot = '3.4.0'
+febit-commons = '3.3.0'
 febit-devkit = '1.4.0'
 
 hierynomus-license = '0.16.1'
-spring-boot = '3.4.0'
-#springdoc = '2.7.0'
+spring-boot = '3.4.1'
 
 lombok = '1.18.36'
 

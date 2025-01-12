@@ -1,4 +1,5 @@
-version: '3'
+name: 'febit-boot-demo'
+
 services:
   postgres:
     image: postgres:16

@@ -15,9 +15,9 @@
  */
 package org.febit.boot.demo.doggy.dao;
 
-import org.febit.boot.jooq.BaseCurdDao;
-import org.febit.boot.jooq.IEntity;
-import org.febit.boot.jooq.ITable;
+import org.febit.common.jooq.BaseCurdDao;
+import org.febit.common.jooq.IEntity;
+import org.febit.common.jooq.ITable;
 import org.jooq.Configuration;
 import org.jooq.UpdatableRecord;
 

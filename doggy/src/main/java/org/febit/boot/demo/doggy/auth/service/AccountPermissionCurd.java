@@ -17,12 +17,12 @@ package org.febit.boot.demo.doggy.auth.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.febit.boot.common.util.Errors;
+import org.febit.boot.demo.doggy.auth.AppAuth;
 import org.febit.boot.demo.doggy.auth.dao.AccountPermissionDao;
-import org.febit.boot.demo.doggy.jmodel.po.AccountPermissionPO;
 import org.febit.boot.demo.doggy.auth.model.account.AccountPermissionSearchForm;
 import org.febit.boot.demo.doggy.auth.model.account.AccountPermissionVO;
-import org.febit.boot.demo.doggy.auth.AppAuth;
+import org.febit.boot.demo.doggy.jmodel.po.AccountPermissionPO;
+import org.febit.boot.util.Errors;
 import org.febit.lang.protocol.Page;
 import org.febit.lang.protocol.Pagination;
 import org.febit.lang.util.Lists;
@@ -49,14 +49,14 @@ public class AccountPermissionCurd {
 
     public List<String> listMyPermissions() {
         return Lists.collect(
-                dao.listByAccount(auth.getId()),
+                dao.listByAccount(auth.id()),
                 AccountPermissionPO::getCode
         );
     }
 
     public Page<AccountPermissionVO> search(Pagination page, AccountPermissionSearchForm form) {
         return dao.page(page, form)
-                .transfer(AccountPermissionVO::of);
+                .map(AccountPermissionVO::of);
     }
 
     public List<AccountPermissionVO> list(AccountPermissionSearchForm form) {

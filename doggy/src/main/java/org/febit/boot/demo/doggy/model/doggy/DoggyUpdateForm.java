@@ -16,9 +16,9 @@
 package org.febit.boot.demo.doggy.model.doggy;
 
 import lombok.Data;
-import org.febit.boot.common.model.IModel;
-import org.febit.boot.common.model.INamed;
 import org.febit.boot.demo.doggy.jmodel.po.DoggyPO;
+import org.febit.boot.model.IModel;
+import org.febit.boot.model.INamed;
 
 @Data
 public class DoggyUpdateForm implements IModel<DoggyPO>, INamed {

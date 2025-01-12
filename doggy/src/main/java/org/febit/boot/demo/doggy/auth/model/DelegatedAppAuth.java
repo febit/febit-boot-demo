@@ -15,7 +15,7 @@
  */
 package org.febit.boot.demo.doggy.auth.model;
 
-import org.febit.boot.common.auth.DelegateAuthSubject;
+import org.febit.boot.auth.DelegateAuthSubject;
 import org.febit.boot.demo.doggy.auth.AppAuth;
 
 import java.util.function.Supplier;
@@ -27,12 +27,12 @@ public interface DelegatedAppAuth extends AppAuth, DelegateAuthSubject<AppAuth> 
     }
 
     @Override
-    default Long getId() {
-        return delegated().getId();
+    default Long id() {
+        return delegated().id();
     }
 
     @Override
-    default String getDisplayName() {
-        return delegated().getDisplayName();
+    default String displayName() {
+        return delegated().displayName();
     }
 }

@@ -17,9 +17,10 @@ package org.febit.boot.demo.doggy.api;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.febit.boot.common.permission.AnonymousApi;
 import org.febit.boot.demo.doggy.JsonApiMapping;
 import org.febit.boot.demo.doggy.auth.AppAuth;
+import org.febit.boot.demo.doggy.auth.model.AppAuthImpl;
+import org.febit.boot.permission.AnonymousApi;
 import org.febit.lang.protocol.IBasicApi;
 import org.febit.lang.protocol.IResponse;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +43,8 @@ public class CommonApi implements IBasicApi {
     @AnonymousApi
     @GetMapping(value = "/who-am-i")
     public IResponse<AppAuth> whoAmI() {
-        return ok(auth);
+        return ok(
+                AppAuthImpl.copyOf(auth)
+        );
     }
 }

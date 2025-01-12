@@ -20,18 +20,18 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.febit.boot.common.util.AuthErrors;
-import org.febit.boot.common.util.Errors;
+import org.febit.boot.demo.doggy.auth.AppAuth;
 import org.febit.boot.demo.doggy.auth.config.AuthProps;
 import org.febit.boot.demo.doggy.auth.dao.AccountDao;
 import org.febit.boot.demo.doggy.auth.dao.AccountPermissionDao;
-import org.febit.boot.demo.doggy.jmodel.po.AccountPO;
-import org.febit.boot.demo.doggy.auth.model.account.AccountVO;
-import org.febit.boot.demo.doggy.auth.AppAuth;
 import org.febit.boot.demo.doggy.auth.model.AppAuthImpl;
 import org.febit.boot.demo.doggy.auth.model.LoginForm;
 import org.febit.boot.demo.doggy.auth.model.LoginVO;
 import org.febit.boot.demo.doggy.auth.model.PasswordChangeForm;
+import org.febit.boot.demo.doggy.auth.model.account.AccountVO;
+import org.febit.boot.demo.doggy.jmodel.po.AccountPO;
+import org.febit.boot.util.AuthErrors;
+import org.febit.boot.util.Errors;
 import org.febit.common.jwt.JwtCodec;
 import org.febit.lang.protocol.BusinessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -61,7 +61,7 @@ public class AuthService {
     }
 
     public boolean checkPermissions(AppAuth auth, Collection<String> permissions) {
-        return accountPermissionDao.checkPermissions(auth.getCode(), permissions);
+        return accountPermissionDao.checkPermissions(auth.identifier(), permissions);
     }
 
     public LoginVO login(LoginForm form) {
@@ -111,13 +111,13 @@ public class AuthService {
     }
 
     public void changePassword(PasswordChangeForm form) {
-        var account = accountCurd.require(auth.getId());
+        var account = accountCurd.require(auth.id());
         verifyPassword(form.getOldPassword(), account.getPasswordHash());
 
         var newHash = BCryptPasswordEncoderLazyHolder.INSTANCE
                 .encode(form.getNewPassword());
 
-        accountCurd.changePasswordHash(auth.getId(), newHash);
+        accountCurd.changePasswordHash(auth.id(), newHash);
     }
 
     public AppAuth fromJwtToken(String token) {
@@ -148,7 +148,7 @@ public class AuthService {
     public AppAuth from(AccountPO account) {
         return AppAuthImpl.builder()
                 .id(account.getId())
-                .code(account.getUsername())
+                .identifier(account.getUsername())
                 .displayName(account.getDisplayName())
                 .build();
     }

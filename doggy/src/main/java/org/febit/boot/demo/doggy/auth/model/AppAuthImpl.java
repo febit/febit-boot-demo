@@ -15,20 +15,24 @@
  */
 package org.febit.boot.demo.doggy.auth.model;
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.jackson.Jacksonized;
 import org.febit.boot.demo.doggy.auth.AppAuth;
 
-@Getter
-@Setter
 @Jacksonized
 @lombok.Builder(
         builderClassName = "Builder"
 )
-public class AppAuthImpl implements AppAuth {
+public record AppAuthImpl(
+        Long id,
+        String identifier,
+        String displayName
+) implements AppAuth {
 
-    private final Long id;
-    private final String code;
-    private final String displayName;
+    public static AppAuthImpl copyOf(AppAuth auth) {
+        return AppAuthImpl.builder()
+                .id(auth.id())
+                .identifier(auth.identifier())
+                .displayName(auth.displayName())
+                .build();
+    }
 }

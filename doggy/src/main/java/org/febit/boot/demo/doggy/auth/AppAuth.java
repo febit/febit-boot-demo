@@ -15,11 +15,11 @@
  */
 package org.febit.boot.demo.doggy.auth;
 
-import org.febit.boot.common.auth.AuthSubject;
+import org.febit.boot.auth.AuthSubject;
 
 public interface AppAuth extends AuthSubject {
 
-    Long getId();
+    Long id();
 
-    String getDisplayName();
+    String displayName();
 }

@@ -17,15 +17,15 @@ package org.febit.boot.demo.doggy.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.febit.boot.common.util.Errors;
+import org.febit.boot.demo.doggy.auth.AppAuth;
 import org.febit.boot.demo.doggy.dao.DoggyDao;
 import org.febit.boot.demo.doggy.jmodel.po.DoggyPO;
-import org.febit.boot.demo.doggy.auth.AppAuth;
 import org.febit.boot.demo.doggy.model.doggy.DoggyCreateForm;
 import org.febit.boot.demo.doggy.model.doggy.DoggySearchForm;
 import org.febit.boot.demo.doggy.model.doggy.DoggyUpdateForm;
 import org.febit.boot.demo.doggy.model.doggy.DoggyVO;
 import org.febit.boot.demo.doggy.util.DoggyErrors;
+import org.febit.boot.util.Errors;
 import org.febit.lang.protocol.Page;
 import org.febit.lang.protocol.Pagination;
 import org.febit.lang.util.Lists;
@@ -53,7 +53,7 @@ public class DoggyCurd {
 
     public Page<DoggyVO> search(DoggySearchForm form, Pagination page) {
         return dao.page(page, form)
-                .transfer(DoggyVO::of);
+                .map(DoggyVO::of);
     }
 
     public List<DoggyVO> list(DoggySearchForm form) {

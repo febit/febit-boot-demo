@@ -82,7 +82,7 @@ package ${MODEL_PKG};
 
 import ${JMODEL_PKG}.po.${entity}PO;
 import lombok.Data;
-import org.febit.boot.common.util.Models;
+import org.febit.boot.util.Models;
 
 ${imports_lines}
 
@@ -103,7 +103,7 @@ package ${MODEL_PKG};
 
 import ${JMODEL_PKG}.po.${entity}PO;
 import lombok.Data;
-import org.febit.boot.common.util.Models;
+import org.febit.boot.util.Models;
 
 ${imports_lines}
 
@@ -124,7 +124,7 @@ package ${MODEL_PKG};
 
 import ${JMODEL_PKG}.po.${entity}PO;
 import lombok.Data;
-import org.febit.boot.common.model.IModel;
+import org.febit.boot.model.IModel;
 
 ${imports_lines}
 
@@ -140,7 +140,7 @@ EOF
   cat > "${MODEL_DIR}/${entity}UpdateForm.java" <<EOF
 package ${MODEL_PKG};
 
-import org.febit.boot.common.model.IModel;
+import org.febit.boot.model.IModel;
 import ${JMODEL_PKG}.po.${entity}PO;
 import lombok.Data;
 
@@ -177,8 +177,8 @@ package ${MODEL_PKG};
 
 import ${JMODEL_PKG}.table.T${entity};
 import lombok.Data;
-import org.febit.boot.jooq.OrderMappingBy;
-import org.febit.boot.jooq.SearchForm;
+import org.febit.common.jooq.OrderMappingBy;
+import org.febit.common.jooq.SearchForm;
 
 ${imports_lines}
 
@@ -228,7 +228,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.febit.boot.common.util.Errors;
+import org.febit.boot.util.Errors;
 import org.febit.lang.protocol.*;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -323,7 +323,7 @@ import ${MODEL_PKG}.${entity}UpdateForm;
 import ${MODEL_PKG}.${entity}SearchForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.febit.boot.common.util.Errors;
+import org.febit.boot.util.Errors;
 import org.febit.lang.protocol.Page;
 import org.febit.lang.protocol.Pagination;
 import org.febit.lang.util.Lists;

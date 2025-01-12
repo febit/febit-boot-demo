@@ -16,12 +16,12 @@
 package org.febit.boot.demo.doggy.auth.config.component;
 
 import lombok.RequiredArgsConstructor;
-import org.febit.boot.common.permission.PermissionItem;
-import org.febit.boot.common.permission.PermissionVerifier;
 import org.febit.boot.demo.doggy.Permissions;
-import org.febit.boot.demo.doggy.auth.Auths;
 import org.febit.boot.demo.doggy.auth.AppAuth;
+import org.febit.boot.demo.doggy.auth.Auths;
 import org.febit.boot.demo.doggy.auth.service.AuthService;
+import org.febit.boot.permission.PermissionItem;
+import org.febit.boot.permission.PermissionVerifier;
 import org.febit.lang.util.Lists;
 import org.springframework.stereotype.Component;
 
@@ -31,8 +31,8 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class PermissionVerifierImpl implements PermissionVerifier<AppAuth> {
 
-    public static final String ADMIN = Auths.ADMIN.getCode();
-    public static final String ANONYMOUS = Auths.ANONYMOUS.getCode();
+    public static final String ADMIN = Auths.ADMIN.identifier();
+    public static final String ANONYMOUS = Auths.ANONYMOUS.identifier();
 
     private static final String BASIC_OF_ALL = Permissions.MODULE
             + ':' + Permissions.ALL + ':' + Permissions.BASIC;
@@ -41,7 +41,7 @@ public class PermissionVerifierImpl implements PermissionVerifier<AppAuth> {
 
     @Override
     public boolean isAllow(AppAuth auth, Collection<PermissionItem> allows) {
-        var code = auth.getCode().toLowerCase();
+        var code = auth.identifier().toLowerCase();
         if (ADMIN.equals(code)) {
             return true;
         }
@@ -51,14 +51,14 @@ public class PermissionVerifierImpl implements PermissionVerifier<AppAuth> {
 
         // Basic roles for basic accounts.
         var allowBasic = allows.stream()
-                .map(PermissionItem::getCode)
+                .map(PermissionItem::code)
                 .anyMatch(p -> p.equals(BASIC_OF_ALL));
         if (allowBasic) {
             return true;
         }
 
         return authService.checkPermissions(auth,
-                Lists.collect(allows, PermissionItem::getCode)
+                Lists.collect(allows, PermissionItem::code)
         );
     }
 }

@@ -6,14 +6,16 @@ spring:
     name: febit-boot-demo
 
 logging.group:
-  jooq:
+  jooq-tips:
     - org.jooq.Constants
+  jooq:
     - org.jooq.tools.LoggerListener
   app:
     - org.febit.boot.demo.doggy
 
 logging.level:
   app: info
+  jooq-tips: warn
   jooq: warn
 
 app.auth:

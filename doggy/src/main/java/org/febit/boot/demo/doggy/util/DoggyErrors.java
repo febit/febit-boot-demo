@@ -17,7 +17,7 @@ package org.febit.boot.demo.doggy.util;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.febit.boot.common.util.IErrors;
+import org.febit.boot.util.IErrors;
 
 @Getter
 @RequiredArgsConstructor

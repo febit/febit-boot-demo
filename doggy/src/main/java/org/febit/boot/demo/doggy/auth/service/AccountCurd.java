@@ -17,14 +17,14 @@ package org.febit.boot.demo.doggy.auth.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.febit.boot.common.util.Errors;
+import org.febit.boot.demo.doggy.auth.AppAuth;
 import org.febit.boot.demo.doggy.auth.dao.AccountDao;
-import org.febit.boot.demo.doggy.jmodel.po.AccountPO;
 import org.febit.boot.demo.doggy.auth.model.account.AccountCreateForm;
 import org.febit.boot.demo.doggy.auth.model.account.AccountSearchForm;
 import org.febit.boot.demo.doggy.auth.model.account.AccountUpdateForm;
 import org.febit.boot.demo.doggy.auth.model.account.AccountVO;
-import org.febit.boot.demo.doggy.auth.AppAuth;
+import org.febit.boot.demo.doggy.jmodel.po.AccountPO;
+import org.febit.boot.util.Errors;
 import org.febit.lang.protocol.Page;
 import org.febit.lang.protocol.Pagination;
 import org.febit.lang.util.Lists;
@@ -51,13 +51,13 @@ public class AccountCurd {
 
     public AccountVO me() {
         return AccountVO.of(
-                require(auth.getId())
+                require(auth.id())
         );
     }
 
     public Page<AccountVO> search(Pagination page, AccountSearchForm form) {
         return dao.page(page, form)
-                .transfer(AccountVO::of);
+                .map(AccountVO::of);
     }
 
     public List<AccountVO> list(AccountSearchForm form) {

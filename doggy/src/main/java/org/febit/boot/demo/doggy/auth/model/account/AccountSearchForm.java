@@ -17,8 +17,8 @@ package org.febit.boot.demo.doggy.auth.model.account;
 
 import lombok.Data;
 import org.febit.boot.demo.doggy.jmodel.table.TAccount;
-import org.febit.boot.jooq.OrderMappingBy;
-import org.febit.boot.jooq.SearchForm;
+import org.febit.common.jooq.OrderMappingBy;
+import org.febit.common.jooq.SearchForm;
 
 @Data
 @OrderMappingBy(AccountOrderMapping.class)

@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run Doggy" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="org.febit.boot.demo.doggy.DoggyApplication"/>
+    <module name="febit-boot-demo.febit-boot-demo-doggy.main"/>
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="org.febit.boot.demo.doggy.*"/>
+        <option name="ENABLED" value="true"/>
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true"/>
+    </method>
+  </configuration>
+</component>

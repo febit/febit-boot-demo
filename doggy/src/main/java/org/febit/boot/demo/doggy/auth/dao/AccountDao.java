@@ -16,11 +16,11 @@
 package org.febit.boot.demo.doggy.auth.dao;
 
 import jakarta.annotation.Nullable;
+import org.febit.boot.demo.doggy.auth.AppAuth;
 import org.febit.boot.demo.doggy.dao.BaseExtraDao;
 import org.febit.boot.demo.doggy.jmodel.po.AccountPO;
 import org.febit.boot.demo.doggy.jmodel.record.AccountRecord;
 import org.febit.boot.demo.doggy.jmodel.table.TAccount;
-import org.febit.boot.demo.doggy.auth.AppAuth;
 import org.jooq.Configuration;
 import org.springframework.stereotype.Repository;
 
@@ -45,7 +45,7 @@ public class AccountDao extends BaseExtraDao<TAccount, AccountPO, Long, AccountR
         update()
                 .set(T.PASSWORD_HASH, passwordHash)
                 .set(T.UPDATED_AT, Instant.now())
-                .set(T.UPDATED_BY, auth.getCode())
+                .set(T.UPDATED_BY, auth.identifier())
                 .where(
                         T.ID.eq(id)
                 )

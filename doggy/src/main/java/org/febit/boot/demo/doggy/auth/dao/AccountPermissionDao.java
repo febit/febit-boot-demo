@@ -15,12 +15,12 @@
  */
 package org.febit.boot.demo.doggy.auth.dao;
 
+import org.febit.boot.demo.doggy.auth.AppAuth;
 import org.febit.boot.demo.doggy.dao.BaseExtraDao;
 import org.febit.boot.demo.doggy.jmodel.Tables;
 import org.febit.boot.demo.doggy.jmodel.po.AccountPermissionPO;
 import org.febit.boot.demo.doggy.jmodel.record.AccountPermissionRecord;
 import org.febit.boot.demo.doggy.jmodel.table.TAccountPermission;
-import org.febit.boot.demo.doggy.auth.AppAuth;
 import org.jooq.Configuration;
 import org.springframework.stereotype.Repository;
 
@@ -54,7 +54,7 @@ public class AccountPermissionDao extends BaseExtraDao<TAccountPermission, Accou
         if (permissions.isEmpty()) {
             return;
         }
-        var createdBy = auth.getCode();
+        var createdBy = auth.identifier();
         var insertDsl = insert()
                 .columns(T.ACCOUNT_ID, T.CODE, T.CREATED_BY, T.UPDATED_BY);
         for (var code : permissions) {

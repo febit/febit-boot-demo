@@ -16,8 +16,8 @@
 package org.febit.boot.demo.doggy.auth.model.account;
 
 import lombok.Data;
-import org.febit.boot.common.util.Models;
 import org.febit.boot.demo.doggy.jmodel.po.AccountPermissionPO;
+import org.febit.boot.util.Models;
 
 import java.time.Instant;
 

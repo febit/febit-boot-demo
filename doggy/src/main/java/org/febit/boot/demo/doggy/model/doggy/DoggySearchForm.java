@@ -17,8 +17,8 @@ package org.febit.boot.demo.doggy.model.doggy;
 
 import lombok.Data;
 import org.febit.boot.demo.doggy.jmodel.table.TDoggy;
-import org.febit.boot.jooq.OrderMappingBy;
-import org.febit.boot.jooq.SearchForm;
+import org.febit.common.jooq.OrderMappingBy;
+import org.febit.common.jooq.SearchForm;
 
 import java.time.Instant;
 import java.util.List;

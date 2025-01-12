@@ -15,12 +15,12 @@
  */
 package org.febit.boot.demo.doggy.auth.config;
 
-import org.febit.boot.common.auth.AuthSuppliers;
-import org.febit.boot.common.auth.ThreadLocalAuthSupplier;
+import org.febit.boot.auth.AuthSuppliers;
+import org.febit.boot.auth.ThreadLocalAuthSupplier;
+import org.febit.boot.auth.web.RequestAttributeAuthSupplier;
 import org.febit.boot.demo.doggy.auth.AppAuth;
 import org.febit.boot.demo.doggy.auth.model.DelegatedAppAuth;
 import org.febit.common.jwt.JwtCodec;
-import org.febit.boot.web.util.RequestAttributeAuthSupplier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -15,7 +15,7 @@
  */
 package org.febit.boot.demo.doggy;
 
-import org.febit.boot.common.permission.Permission;
+import org.febit.boot.permission.Permission;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -31,19 +31,19 @@ public @interface Permissions {
     String ADMIN = "admin";
     String MAINTAINER = "maintainer";
 
-    @Permission(module = MODULE, code = ALL, action = ADMIN)
+    @Permission(module = MODULE, resource = ALL, action = ADMIN)
     @Target(ElementType.METHOD)
     @Retention(RetentionPolicy.RUNTIME)
     @interface Admin {
     }
 
-    @Permission(module = MODULE, code = ALL, action = MAINTAINER)
+    @Permission(module = MODULE, resource = ALL, action = MAINTAINER)
     @Target(ElementType.METHOD)
     @Retention(RetentionPolicy.RUNTIME)
     @interface Maintainer {
     }
 
-    @Permission(module = MODULE, code = ALL, action = BASIC)
+    @Permission(module = MODULE, resource = ALL, action = BASIC)
     @Target(ElementType.METHOD)
     @Retention(RetentionPolicy.RUNTIME)
     @interface Basic {

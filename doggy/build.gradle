@@ -1,3 +1,5 @@
+import org.febit.boot.devkit.jooq.gradle.container.DbType
+
 plugins {
   alias libs.plugins.spring.boot
   alias libs.plugins.febit.boot.jooq
@@ -30,7 +32,10 @@ febitFlyway {
 codegenJooq {
   def MODEL_PKG = "${PKG}.model"
 
-  embeddedPostgres()
+//  embeddedPostgres()
+  containerDatabase {
+    type = DbType.POSTGRES
+  }
 
   schema = 'doggy'
   targetPackage = "${PKG}.jmodel"

@@ -23,19 +23,19 @@ public class Auths {
 
     public static final AppAuth ANONYMOUS = AppAuthImpl.builder()
             .id(401L)
-            .code("anonymous")
+            .identifier("anonymous")
             .displayName("Anonymous")
             .build();
 
     public static final AppAuth SYSTEM = AppAuthImpl.builder()
             .id(101L)
-            .code("system")
+            .identifier("system")
             .displayName("System")
             .build();
 
     public static final AppAuth ADMIN = AppAuthImpl.builder()
             .id(201L)
-            .code("admin")
+            .identifier("admin")
             .displayName("Admin")
             .build();
 

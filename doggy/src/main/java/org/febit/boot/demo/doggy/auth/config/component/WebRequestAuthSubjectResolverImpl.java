@@ -17,11 +17,11 @@ package org.febit.boot.demo.doggy.auth.config.component;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.febit.boot.auth.WebRequestAuthSubjectResolver;
-import org.febit.boot.common.util.AuthErrors;
-import org.febit.boot.demo.doggy.auth.Auths;
+import org.febit.boot.auth.web.WebRequestAuthSubjectResolver;
 import org.febit.boot.demo.doggy.auth.AppAuth;
+import org.febit.boot.demo.doggy.auth.Auths;
 import org.febit.boot.demo.doggy.auth.service.AuthService;
+import org.febit.boot.util.AuthErrors;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.WebRequest;

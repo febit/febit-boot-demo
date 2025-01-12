@@ -16,8 +16,8 @@
 package org.febit.boot.demo.doggy.auth.model.account;
 
 import lombok.Data;
-import org.febit.boot.common.model.IModel;
 import org.febit.boot.demo.doggy.jmodel.po.AccountPO;
+import org.febit.boot.model.IModel;
 
 @Data
 public class AccountUpdateForm implements IModel<AccountPO> {
