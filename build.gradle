@@ -10,8 +10,8 @@ plugins {
 ext {
 }
 
-group 'org.febit.boot.demo'
-version '1.0.0-SNAPSHOT'
+group = 'org.febit.boot.demo'
+version = '1.0.0-SNAPSHOT'
 
 allprojects {
   apply plugin: 'com.github.hierynomus.license'
@@ -27,9 +27,9 @@ allprojects {
     include '**/*.java'
     exclude '**/jmodel/**/*.java'
     ignoreFailures = true
-    strictCheck false
-    skipExistingHeaders false
-    header rootProject.file('etc/license-header.txt')
+    strictCheck = false
+    skipExistingHeaders = false
+    header = rootProject.file('etc/license-header.txt')
   }
 }
 
@@ -48,10 +48,13 @@ subprojects {
     version = libs.versions.lombok
   }
 
+  licenseMain {
+    mustRunAfter generateModule
+  }
+
   repositories {
-//    maven { url "https://repo.huaweicloud.com/repository/maven" }
     mavenCentral()
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    // maven { url = "https://oss.sonatype.org/content/repositories/snapshots" }
   }
 
   test {

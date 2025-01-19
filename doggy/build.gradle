@@ -39,7 +39,7 @@ codegenJooq {
 
   schema = 'doggy'
   targetPackage = "${PKG}.jmodel"
-  generate {
+  generate = {
     springAnnotations = true
   }
   forcedTypes {
