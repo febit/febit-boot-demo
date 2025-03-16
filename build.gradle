@@ -1,3 +1,7 @@
+//buildscript {
+//  configurations.all { resolutionStrategy.cacheChangingModulesFor 0, 'seconds' }
+//}
+
 plugins {
   alias libs.plugins.febit.java
   alias libs.plugins.febit.maven.publish
@@ -31,6 +35,18 @@ allprojects {
     skipExistingHeaders = false
     header = rootProject.file('etc/license-header.txt')
   }
+
+  tasks.matching {
+    it.name == "licenseMain"
+        || it.name == "generateEffectiveLombokConfig"
+  }.configureEach {
+    it.mustRunAfter tasks.matching {
+      it.name == "generateJooq"
+          || it.name == "generateModule"
+          || it.name == "generateFeign"
+    }
+  }
+
 }
 
 subprojects {
@@ -54,7 +70,7 @@ subprojects {
 
   repositories {
     mavenCentral()
-    // maven { url = "https://oss.sonatype.org/content/repositories/snapshots" }
+    maven { url = "https://oss.sonatype.org/content/repositories/snapshots" }
   }
 
   test {

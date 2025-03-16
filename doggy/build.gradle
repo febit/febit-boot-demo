@@ -25,7 +25,7 @@ codegenModule {
 }
 
 febitFlyway {
-  // excludeTask '.*-(baseline|undo|repair)-.*'
+  excludeTask '.*-(baseline|undo|repair)-.*'
   excludeTask '.*-(prod|pre|uat|unit-test)'
 }
 
@@ -54,8 +54,6 @@ codegenJooq {
 }
 
 dependencies {
-//  implementation libs.springdoc
-
   implementation 'org.febit:febit-lang'
   implementation 'org.febit:febit-commons-stuff'
 
@@ -72,6 +70,7 @@ dependencies {
   runtimeOnly 'org.postgresql:postgresql'
 
   codegenJooq 'org.slf4j:slf4j-simple'
+  codegenJooq 'org.postgresql:postgresql'
 
   testRuntimeOnly 'com.h2database:h2'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'

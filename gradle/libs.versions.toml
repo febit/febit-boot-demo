@@ -1,5 +1,5 @@
 [versions]
-febit-boot = '3.4.0'
+febit-boot = '3.4.1-SNAPSHOT'
 febit-commons = '3.3.1'
 febit-devkit = '1.4.1'
 
