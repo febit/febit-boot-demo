@@ -32,10 +32,16 @@ febitFlyway {
 codegenJooq {
   def MODEL_PKG = "${PKG}.model"
 
-//  embeddedPostgres()
   containerDatabase {
     type = DbType.POSTGRES
   }
+
+//  embeddedPostgres()
+//  presetJdbc {
+//    url = "jdbc:postgresql://localhost:54322/demo_dev?currentSchema=doggy"
+//    user = "test"
+//    password = "test"
+//  }
 
   schema = 'doggy'
   targetPackage = "${PKG}.jmodel"
