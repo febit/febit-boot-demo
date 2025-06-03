@@ -15,14 +15,14 @@
  */
 package org.febit.boot.demo.doggy.dao;
 
-import org.febit.common.jooq.BaseCurdDao;
+import org.febit.common.jooq.BaseCrudDao;
 import org.febit.common.jooq.IEntity;
 import org.febit.common.jooq.ITable;
 import org.jooq.Configuration;
 import org.jooq.UpdatableRecord;
 
 public abstract class BaseExtraDao<TB extends ITable<R, ID>, PO extends IEntity<ID>, ID, R extends UpdatableRecord<R>>
-        extends BaseCurdDao<TB, PO, ID, R> {
+        extends BaseCrudDao<TB, PO, ID, R> {
 
     protected BaseExtraDao(Configuration conf) {
         super(conf);

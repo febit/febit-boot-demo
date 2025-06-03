@@ -53,7 +53,7 @@ public class AuthService {
     final JwtCodec jwtCodec;
 
     final AccountDao accountDao;
-    final AccountCurd accountCurd;
+    final AccountCrud accountCrud;
     final AccountPermissionDao accountPermissionDao;
 
     private static class BCryptPasswordEncoderLazyHolder {
@@ -111,13 +111,13 @@ public class AuthService {
     }
 
     public void changePassword(PasswordChangeForm form) {
-        var account = accountCurd.require(auth.id());
+        var account = accountCrud.require(auth.id());
         verifyPassword(form.getOldPassword(), account.getPasswordHash());
 
         var newHash = BCryptPasswordEncoderLazyHolder.INSTANCE
                 .encode(form.getNewPassword());
 
-        accountCurd.changePasswordHash(auth.id(), newHash);
+        accountCrud.changePasswordHash(auth.id(), newHash);
     }
 
     public AppAuth fromJwtToken(String token) {

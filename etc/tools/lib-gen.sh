@@ -223,7 +223,7 @@ import ${MODEL_PKG}.${entity}CreateForm;
 import ${MODEL_PKG}.${entity}UpdateForm;
 import ${MODEL_PKG}.${entity}SearchForm;
 import ${MODEL_PKG}.${entity}VO;
-import ${CRUD_PKG}.${entity}Curd;
+import ${CRUD_PKG}.${entity}Crud;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -248,14 +248,14 @@ import java.util.List;
 })
 public class ${entity}Api implements IBasicApi {
 
-    private final ${entity}Curd curd;
+    private final ${entity}Crud crud;
 
     @GetMapping("/{id}")
     public IResponse<${entity}VO> requireById(
             @PathVariable ${entity_id_type} id
     ) {
         return ok(${entity}VO.of(
-                curd.require(id)
+                crud.require(id)
         ));
     }
 
@@ -263,7 +263,7 @@ public class ${entity}Api implements IBasicApi {
     public IResponse<List<${entity}BriefVO>> list(
             @RequestBody @Valid ${entity}SearchForm form
     ) {
-        return ok(curd.list(form));
+        return ok(crud.list(form));
     }
 
     @PostMapping("/search")
@@ -271,7 +271,7 @@ public class ${entity}Api implements IBasicApi {
             Pagination page,
             @RequestBody @Valid ${entity}SearchForm form
     ) {
-        return ok(curd.search(page, form));
+        return ok(crud.search(page, form));
     }
 
     @PostMapping("")
@@ -279,7 +279,7 @@ public class ${entity}Api implements IBasicApi {
             @RequestBody @Valid ${entity}CreateForm form
     ) {
         return ok(${entity}VO.of(
-                curd.create(form)
+                crud.create(form)
         ));
     }
 
@@ -289,7 +289,7 @@ public class ${entity}Api implements IBasicApi {
             @RequestBody @Valid ${entity}UpdateForm form
     ) {
         return ok(${entity}VO.of(
-                curd.update(id, form)
+                crud.update(id, form)
         ));
     }
 
@@ -297,7 +297,7 @@ public class ${entity}Api implements IBasicApi {
     public IResponse<Void> deleteById(
             @PathVariable ${entity_id_type} id
     ) {
-        curd.deleteById(id);
+        crud.deleteById(id);
         return ok();
     }
 
@@ -305,14 +305,14 @@ public class ${entity}Api implements IBasicApi {
     public IResponse<Void> deleteByIds(
             @PathVariable List<${entity_id_type}> ids
     ) {
-        curd.deleteByIds(ids);
+        crud.deleteByIds(ids);
         return ok();
     }
 }
 EOF
 
 # ======================================= #
-  cat > "${CRUD_DIR}/${entity}Curd.java" <<EOF
+  cat > "${CRUD_DIR}/${entity}Crud.java" <<EOF
 package ${CRUD_PKG};
 
 import ${DAO_PKG}.${entity}Dao;
@@ -335,7 +335,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ${entity}Curd {
+public class ${entity}Crud {
 
     private final AuthSubject auth;
 

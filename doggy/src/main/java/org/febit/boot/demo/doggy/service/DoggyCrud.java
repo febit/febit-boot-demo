@@ -37,7 +37,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class DoggyCurd {
+public class DoggyCrud {
 
     private final AppAuth auth;
 

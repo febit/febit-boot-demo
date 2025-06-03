@@ -34,7 +34,7 @@ import java.util.Set;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AccountPermissionCurd {
+public class AccountPermissionCrud {
 
     private final AppAuth auth;
 

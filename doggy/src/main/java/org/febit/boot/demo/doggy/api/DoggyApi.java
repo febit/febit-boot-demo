@@ -24,7 +24,7 @@ import org.febit.boot.demo.doggy.model.doggy.DoggyCreateForm;
 import org.febit.boot.demo.doggy.model.doggy.DoggySearchForm;
 import org.febit.boot.demo.doggy.model.doggy.DoggyUpdateForm;
 import org.febit.boot.demo.doggy.model.doggy.DoggyVO;
-import org.febit.boot.demo.doggy.service.DoggyCurd;
+import org.febit.boot.demo.doggy.service.DoggyCrud;
 import org.febit.boot.util.Errors;
 import org.febit.lang.protocol.IBasicApi;
 import org.febit.lang.protocol.IResponse;
@@ -49,7 +49,7 @@ import java.util.List;
 })
 public class DoggyApi implements IBasicApi {
 
-    final DoggyCurd curd;
+    final DoggyCrud crud;
 
     @Permissions.Basic
     @GetMapping("/{id}")
@@ -57,7 +57,7 @@ public class DoggyApi implements IBasicApi {
             @PathVariable Integer id
     ) {
         return ok(
-                curd.requireVoById(id)
+                crud.requireVoById(id)
         );
     }
 
@@ -67,7 +67,7 @@ public class DoggyApi implements IBasicApi {
             @RequestBody @Valid DoggySearchForm form
     ) {
         return ok(
-                curd.list(form)
+                crud.list(form)
         );
     }
 
@@ -78,7 +78,7 @@ public class DoggyApi implements IBasicApi {
             @RequestBody @Valid DoggySearchForm form
     ) {
         return ok(
-                curd.search(form, page)
+                crud.search(form, page)
         );
     }
 
@@ -88,7 +88,7 @@ public class DoggyApi implements IBasicApi {
             @RequestBody @Valid DoggyCreateForm form
     ) {
         return ok(
-                curd.create(form)
+                crud.create(form)
         );
     }
 
@@ -98,7 +98,7 @@ public class DoggyApi implements IBasicApi {
             @PathVariable Integer id,
             @RequestBody @Valid DoggyUpdateForm form
     ) {
-        return ok(curd.update(id, form));
+        return ok(crud.update(id, form));
     }
 
     @Permissions.Admin
@@ -106,7 +106,7 @@ public class DoggyApi implements IBasicApi {
     public IResponse<Void> deleteById(
             @PathVariable Integer id
     ) {
-        curd.deleteById(id);
+        crud.deleteById(id);
         return ok();
     }
 
@@ -117,7 +117,7 @@ public class DoggyApi implements IBasicApi {
     ) {
         Errors.ILLEGAL_ARG.whenFalse(ids.size() <= 1000,
                 "args.size.less-equals-than", "ids", 100);
-        curd.deleteByIds(ids);
+        crud.deleteByIds(ids);
         return ok();
     }
 

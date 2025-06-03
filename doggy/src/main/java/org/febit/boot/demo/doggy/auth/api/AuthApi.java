@@ -24,8 +24,8 @@ import org.febit.boot.demo.doggy.auth.model.LoginForm;
 import org.febit.boot.demo.doggy.auth.model.LoginVO;
 import org.febit.boot.demo.doggy.auth.model.PasswordChangeForm;
 import org.febit.boot.demo.doggy.auth.model.account.AccountVO;
-import org.febit.boot.demo.doggy.auth.service.AccountCurd;
-import org.febit.boot.demo.doggy.auth.service.AccountPermissionCurd;
+import org.febit.boot.demo.doggy.auth.service.AccountCrud;
+import org.febit.boot.demo.doggy.auth.service.AccountPermissionCrud;
 import org.febit.boot.demo.doggy.auth.service.AuthService;
 import org.febit.boot.permission.AnonymousApi;
 import org.febit.lang.protocol.IBasicApi;
@@ -43,8 +43,8 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class AuthApi implements IBasicApi {
 
-    private final AccountCurd accountCurd;
-    private final AccountPermissionCurd accountPermissionCurd;
+    private final AccountCrud accountCrud;
+    private final AccountPermissionCrud accountPermissionCrud;
 
     private final AuthService service;
 
@@ -72,7 +72,7 @@ public class AuthApi implements IBasicApi {
     public IResponse<AccountVO> me(
     ) {
         return ok(
-                accountCurd.me()
+                accountCrud.me()
         );
     }
 
@@ -80,7 +80,7 @@ public class AuthApi implements IBasicApi {
     @GetMapping(value = "/me/permissions")
     public IResponse<Collection<String>> myPermissions() {
         return ok(
-                accountPermissionCurd.listMyPermissions()
+                accountPermissionCrud.listMyPermissions()
         );
     }
 

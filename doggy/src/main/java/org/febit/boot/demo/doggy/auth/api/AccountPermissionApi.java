@@ -23,7 +23,7 @@ import org.febit.boot.demo.doggy.Permissions;
 import org.febit.boot.demo.doggy.auth.model.account.AccountPermissionSearchForm;
 import org.febit.boot.demo.doggy.auth.model.account.AccountPermissionVO;
 import org.febit.boot.demo.doggy.auth.model.PermissionAuthorizeForm;
-import org.febit.boot.demo.doggy.auth.service.AccountPermissionCurd;
+import org.febit.boot.demo.doggy.auth.service.AccountPermissionCrud;
 import org.febit.lang.protocol.IBasicApi;
 import org.febit.lang.protocol.IResponse;
 import org.febit.lang.protocol.Page;
@@ -44,7 +44,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AccountPermissionApi implements IBasicApi {
 
-    private final AccountPermissionCurd curd;
+    private final AccountPermissionCrud crud;
 
     @Permissions.Admin
     @GetMapping("/{id}")
@@ -52,7 +52,7 @@ public class AccountPermissionApi implements IBasicApi {
             @PathVariable Long id
     ) {
         return ok(AccountPermissionVO.of(
-                curd.require(id)
+                crud.require(id)
         ));
     }
 
@@ -61,7 +61,7 @@ public class AccountPermissionApi implements IBasicApi {
     public IResponse<List<AccountPermissionVO>> list(
             @RequestBody @Valid AccountPermissionSearchForm form
     ) {
-        return ok(curd.list(form));
+        return ok(crud.list(form));
     }
 
     @Permissions.Admin
@@ -70,7 +70,7 @@ public class AccountPermissionApi implements IBasicApi {
             Pagination page,
             @RequestBody @Valid AccountPermissionSearchForm form
     ) {
-        return ok(curd.search(page, form));
+        return ok(crud.search(page, form));
     }
 
     @Permissions.Admin
@@ -78,7 +78,7 @@ public class AccountPermissionApi implements IBasicApi {
     public IResponse<Void> remove(
             @RequestBody @Valid PermissionAuthorizeForm form
     ) {
-        curd.remove(form.getAccountId(), form.getPermissions());
+        crud.remove(form.getAccountId(), form.getPermissions());
         return ok();
     }
 
@@ -87,7 +87,7 @@ public class AccountPermissionApi implements IBasicApi {
     public IResponse<Void> add(
             @RequestBody @Valid PermissionAuthorizeForm form
     ) {
-        curd.add(form.getAccountId(), form.getPermissions());
+        crud.add(form.getAccountId(), form.getPermissions());
         return ok();
     }
 
@@ -96,7 +96,7 @@ public class AccountPermissionApi implements IBasicApi {
     public IResponse<Void> set(
             @RequestBody @Valid PermissionAuthorizeForm form
     ) {
-        curd.set(form.getAccountId(), form.getPermissions());
+        crud.set(form.getAccountId(), form.getPermissions());
         return ok();
     }
 

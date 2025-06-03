@@ -36,7 +36,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AccountCurd {
+public class AccountCrud {
 
     private final AppAuth auth;
 

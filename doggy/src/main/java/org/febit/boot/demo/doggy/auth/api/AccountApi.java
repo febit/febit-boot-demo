@@ -24,7 +24,7 @@ import org.febit.boot.demo.doggy.auth.model.account.AccountCreateForm;
 import org.febit.boot.demo.doggy.auth.model.account.AccountSearchForm;
 import org.febit.boot.demo.doggy.auth.model.account.AccountUpdateForm;
 import org.febit.boot.demo.doggy.auth.model.account.AccountVO;
-import org.febit.boot.demo.doggy.auth.service.AccountCurd;
+import org.febit.boot.demo.doggy.auth.service.AccountCrud;
 import org.febit.lang.protocol.IBasicApi;
 import org.febit.lang.protocol.IResponse;
 import org.febit.lang.protocol.Page;
@@ -45,7 +45,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AccountApi implements IBasicApi {
 
-    private final AccountCurd curd;
+    private final AccountCrud crud;
 
     @Permissions.Admin
     @GetMapping("/{id}")
@@ -53,7 +53,7 @@ public class AccountApi implements IBasicApi {
             @PathVariable Long id
     ) {
         return ok(AccountVO.of(
-                curd.require(id)
+                crud.require(id)
         ));
     }
 
@@ -62,7 +62,7 @@ public class AccountApi implements IBasicApi {
     public IResponse<List<AccountVO>> list(
             @RequestBody @Valid AccountSearchForm form
     ) {
-        return ok(curd.list(form));
+        return ok(crud.list(form));
     }
 
     @Permissions.Admin
@@ -71,7 +71,7 @@ public class AccountApi implements IBasicApi {
             Pagination page,
             @RequestBody @Valid AccountSearchForm form
     ) {
-        return ok(curd.search(page, form));
+        return ok(crud.search(page, form));
     }
 
     @Permissions.Admin
@@ -80,7 +80,7 @@ public class AccountApi implements IBasicApi {
             @RequestBody @Valid AccountCreateForm form
     ) {
         return ok(AccountVO.of(
-                curd.create(form)
+                crud.create(form)
         ));
     }
 
@@ -91,7 +91,7 @@ public class AccountApi implements IBasicApi {
             @RequestBody @Valid AccountUpdateForm form
     ) {
         return ok(AccountVO.of(
-                curd.update(id, form)
+                crud.update(id, form)
         ));
     }
 
@@ -100,7 +100,7 @@ public class AccountApi implements IBasicApi {
     public IResponse<Void> deleteById(
             @PathVariable Long id
     ) {
-        curd.deleteById(id);
+        crud.deleteById(id);
         return ok();
     }
 
@@ -109,7 +109,7 @@ public class AccountApi implements IBasicApi {
     public IResponse<Void> deleteByIds(
             @PathVariable List<Long> ids
     ) {
-        curd.deleteByIds(ids);
+        crud.deleteByIds(ids);
         return ok();
     }
 }
