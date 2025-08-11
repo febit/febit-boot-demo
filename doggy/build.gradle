@@ -22,6 +22,7 @@ bootJar {
 
 codegenModule {
   module "${PKG}.DoggyApiVersion"
+  // gitDir = null
 }
 
 febitFlyway {
