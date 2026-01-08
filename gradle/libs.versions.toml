@@ -1,12 +1,12 @@
 [versions]
-febit-boot = '3.5.0'
-febit-commons = '3.3.3'
-febit-devkit = '1.4.2'
+febit-boot = '3.5.1'
+febit-commons = '3.4.0'
+febit-devkit = '1.5.0'
 
 hierynomus-license = '0.16.1'
-spring-boot = '3.5.4'
+spring-boot = '3.5.9'
 
-lombok = '1.18.38'
+lombok = '1.18.42'
 
 [libraries]
 febit-commons-deps = { module = 'org.febit:febit-commons-dependencies', version.ref = 'febit-commons' }

@@ -60,6 +60,12 @@ codegenJooq {
   }
 }
 
+dependencyManagement {
+  imports {
+    mavenBom "${libs.febit.commons.deps.get()}"
+  }
+}
+
 dependencies {
   implementation 'org.febit:febit-lang'
   implementation 'org.febit:febit-commons-stuff'

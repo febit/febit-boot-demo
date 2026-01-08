@@ -28,7 +28,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.util.Optional;
 
-import static org.apache.commons.lang3.StringUtils.removeStart;
+import static org.apache.commons.lang3.Strings.CI;
 
 @Slf4j
 @Component
@@ -52,12 +52,12 @@ public class WebRequestAuthSubjectResolverImpl implements WebRequestAuthSubjectR
     private AppAuth parse(String token) {
         if (token.startsWith(PREFIX_BEARER)) {
             return parseBearer(
-                    removeStart(token, PREFIX_BEARER)
+                    CI.removeStart(token, PREFIX_BEARER)
             );
         }
         if (token.startsWith(PREFIX_FAKE)) {
             return parseFake(
-                    removeStart(token, PREFIX_FAKE)
+                    CI.removeStart(token, PREFIX_FAKE)
             );
         }
         throw AuthErrors.UNSUPPORTED_GRANT_TYPE
